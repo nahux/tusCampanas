@@ -1,4 +1,51 @@
 html, body {
-    margin: 0;
-    height: 100%;
+	margin: 0;
+	height: 100%;
+	background-color: #c1cee0;
 }
+
+/* Botones que es y entrar */
+.botonesTopIzq {
+	position: absolute; 
+	top: 0; 
+	left: 3%; 
+	width: 500px; 
+	text-align:left;
+}
+
+.botonesTopDer {
+	position: absolute; 
+	top: 0; 
+	right: 5%; 
+	width: 100px; 
+	text-align:right;
+}
+
+.botonComienza {
+	background-color: #3086ff; 
+	color: white; 
+	font-weight: 600;
+}
+
+.contenido {
+	width: 95%; 
+	margin-left: 2%; 
+	height: 100%;
+	background-color: #eee;
+}
+/* FIN INICIO */
+
+/* INICIAR SESION */
+.form {
+	margin-left: 40%;
+	margin-top: 10%
+}
+
+.contenidoIniciarSesion {
+	position: fixed;
+	width: 95%; 
+	margin-left: 2%; 
+	height: 100%;
+	background-color: #eee;
+}
+/* FIN INICIAR SESION */

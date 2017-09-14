@@ -1,10 +1,23 @@
 //App
-var app = angular.module('testangular', ['ui.router']);
+var app = angular.module('inicio', ['ui.router']);
 
 //Controller
-app.controller('testangularCtrl', function($scope) {
+app.controller('inicioCtrl', function($scope) {
 
 });
+
+
+//Componentes
+angular.module('inicio').component('compAbout', {
+  template:  '<h3>¡Bienvenido a {{$ctrl.titulo}}!</h3>' +
+			 '<p> {{$ctrl.mensaje}} </p>',
+		   
+  controller: function() {
+	this.titulo = 'TusCampañas';
+	this.mensaje = 'En Tus campañas usted puede promocionar sus productos o servicios de una manera eficiente y fácil de usar.';
+  }
+})
+
 
 //Config States
 app.config(function($stateProvider){
@@ -18,7 +31,7 @@ app.config(function($stateProvider){
 	var aboutState = {
 		name: 'about',
 		url: '/about',
-		template: '<h3> Acerca de </h3>'
+		component: 'compAbout'
 	}
 
 	//Registro los states

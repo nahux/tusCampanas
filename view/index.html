@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html ng-app="testangular">
+<html ng-app="inicio">
 <head>
 	<title>Test AngularJS</title>
 	<meta charset="utf-8">
+	<!-- Angular -->
 	<script type="text/javascript" src="../js/angular.min.js"></script>
 	<script type="text/javascript" src="../js/angular-ui-router.js"></script>
 	<script src="../js/inicio.js"></script>
@@ -11,29 +12,34 @@
 	<link href="../css/inicio.css" rel="stylesheet">
 	<style>.active { color: red; font-weight: bolder; } .nav {text-decoration: none} html {font-family: arial}</style>
 </head>
-<body ng-controller="testangularCtrl">
+<body ng-controller="inicioCtrl">
 	<!-- Botones top -->
 	<div>
-		<div style="position: absolute; top: 0; left: 1%; width: 500px; text-align:left;">
+		<div class="botonesTopIzq">
 			<img src="" width="20px" height="20px" style="float:left">
-			<a ui-sref="about" class="nav" ui-sref-active="active">¿Qué es TusCampañas?</a>
+			<a ui-sref="about" class="nav" ui-sref-active="active">¿Qué es?</a>
 		</div>
-		<div style="position: absolute; top: 0; right: 1%; width: 100px; text-align:right;">
-			<a ui-sref="inicio" class="nav" ui-sref-active="active">Entrar</a>
+		<div class="botonesTopDer">
+			<!--
+			<a ui-sref="inicio" class="nav" ui-sref-active="active">Entrar</a> -->
+			<a href="login.html" class="nav" ui-sref-active="active">Entrar</a>
 		</div>
 	</div>
-	<br><br>
-	<ui-view></ui-view>
 
 	<!-- Contenido -->
-	<div style="width: 75%; margin-left: 10%; height: 100%; background-color: #eee">
+	<div class="contenido">
 		<div class="jumbotron" style="text-align: center">
 			<img src="" width="500px" height="100px">
 			<h1>TusCampañas</h1>
 			<p>TusCampañas es un sitio donde puedes gestionar tus campañas de marketing de la manera más fácil<p>
-			<p><a class="btn btn-primary btn-lg" href="#" role="button">Comienza aquí</a></p>
+			<p><a class="botonComienza btn btn-default" href="login.html" role="button">Comienza aquí</a></p>
+		</div>
+		<div>
+			<p style="text-align: center"><ui-view></ui-view></p>
 		</div>
 	</div>
+
+	
 
 </body>
 </html>
