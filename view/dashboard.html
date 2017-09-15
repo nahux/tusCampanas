@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="inicio">
+<head>
+	<title>TusCampañas - Mi área de trabajo</title>
+	<meta charset="utf-8">
+	<!-- Angular -->
+	<script type="text/javascript" src="../js/angular.min.js"></script>
+	<script type="text/javascript" src="../js/angular-ui-router.js"></script>
+	<script src="../js/inicio.js"></script>
+	<!-- Bootstrap -->
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../css/inicio.css" rel="stylesheet">
+
+	<style>.active { color: red; font-weight: bolder; } .nav {text-decoration: none} html {font-family: arial}</style>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">
+					<img alt="TusCampañas" src="...">
+				</a>
+				
+				<p class="navbar-right navbar-text"> <a href="index.html" class="navbar-link" >Salir</a></p>
+			</div>
+		</div>
+	</nav>
+
+	<div class="contenidoIniciarSesion">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="btn-group btn-group-lg" role="group">
+					<a ui-sref="campanas" class="btn btn-default" ui-sref-active="active">Campañas</a>
+					<button ui-sref="grupos" class="btn btn-default" ui-sref-active="active">Grupos</button>
+				</div>
+			</div>
+			<div style="text-align: left" class="panel-body">
+				<!-- Aca va el contenido -->
+				<div class="bloqueIzquierda">
+					<ui-view></ui-view>
+				</div>
+
+				<div class="bloqueDerecha panel panel-default">
+					<div class="panel-heading">México 3 días</div>
+					<div class="panel-body">
+						<h4>Título</h4>
+						<p>México 3 días</p>
+						<h4>Descripción</h4>
+						<p>México 3 días en Cancún </p>
+						<br>
+						<button class="btn btn-default">Editar</button>
+						<button style="margin-left:25px" class="btn btn-default">Borrar</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -49,3 +49,14 @@ html, body {
 	background-color: #eee;
 }
 /* FIN INICIAR SESION */
+
+/* DASHBOARD */
+.bloqueIzquierda {
+	float: left;
+}
+.bloqueDerecha{
+	float: right;
+	margin-right: 50%;
+    margin-top: 5%;
+}
+/* FIN DASHBOARD */
