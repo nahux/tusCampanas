@@ -13,7 +13,7 @@ app.controller('loginCtrl', function($scope) {
 });
 
 
-//Componentes
+//Componentes Inicio
 angular.module('inicio').component('compAbout', {
   template:  '<h3>¡Bienvenido a {{$ctrl.titulo}}!</h3>' +
 			 '<p> {{$ctrl.mensaje}} </p>',
@@ -27,7 +27,7 @@ angular.module('inicio').component('compAbout', {
 
 //Config States
 app.config(function($stateProvider){
-	//Estados inivcio
+	//Estados inicio
 	var inicioState = {
 		name: 'inicio',
 		url: '/inicio',
@@ -43,50 +43,44 @@ app.config(function($stateProvider){
 	$stateProvider.state(inicioState);
 	$stateProvider.state(aboutState);
 	////////////////////
+
 	//Estados dashboard
 	var campanasState = {
 		name: 'campanas',
 		url: '/campanas',
-		template: '	<div class="input-group"> ' +
-						'<h1>Tus Campañas</h1>' +
-						'<div class="input-group">'+
-						'	<input type="text" class="form-control" placeholder="Campañas...">'+
-						'	<span class="input-group-btn">'+
-						'		<button class="btn btn-default" type="button">Buscar!</button>'+
-						'	</span>' +
-						'</div><br>'+
-						'<div class="list-group"> ' +
-						'	<button type="button" class="list-group-item"> México 3 días</button> ' +
-						'	<button type="button" class="list-group-item"> Córdiba 1 semana</button> ' +
-						'	<button type="button" class="list-group-item"> Crucero Miami</button> ' +
-						'</div>' +
-						'<button class="btn btn-default" type="button">Nueva</button>  '+
-					'</div>'
-		/*templateUrl: 'partial-campanas.html'*/
+		component: 'compCamp',
+		resolve: {
+		campanas: function(CampanasService) {
+		  return CampanasService.getCampanas();
+		}
+	  }
+	}
+
+	var campanaState = {
+		name: 'campana', 
+		url: '/campanas/{campanaId}', 
+		component: 'compCampana',
+		resolve: {
+			campana: function(CampanasService, $stateParams) {
+				return CampanasService.getCampana($stateParams.campanaId);
+			}
+		}
 	}
 
 	var gruposState = {
 		name: 'grupos',
 		url: '/grupos',
-		template:   '<div class="input-group"> ' +
-						'<h1>Tus Grupos</h1>' +
-						'<div class="input-group">'+
-						'	<input type="text" class="form-control" placeholder="Grupos...">'+
-						'	<span class="input-group-btn">'+
-						'		<button class="btn btn-default" type="button">Buscar!</button>'+ 
-						'	</span>'+
-						'</div><br>'+
-						'<div class="list-group"> ' +
-						'	<button type="button" class="list-group-item">Adultos La Plata</button> ' +
-						'	<button type="button" class="list-group-item">Colegas</button> ' +
-						'	<button type="button" class="list-group-item">Padres</button> ' +
-						'</div>' +
-					'</div>'
-		/*templateUrl: 'partial-grupos.html'*/
+		component: 'compGrupos',
+		resolve: {
+			grupos: function(GruposService) {
+			  return GruposService.getGrupos();
+		}
+	  }
 	}
 	
 	//Registro los states
 	$stateProvider.state(campanasState);
+	$stateProvider.state(campanaState);
 	$stateProvider.state(gruposState);
 	////////////////////
 });

@@ -1,4 +1,4 @@
-<div class="input-group">    
+<div class="input-group" ng-controller="CampanasController">    
 	<h1>Tus Campañas</h1>   
 	<div class="input-group">  
 		<input type="text" class="form-control" placeholder="Campañas...">  
@@ -6,10 +6,13 @@
 			<button class="btn btn-default" type="button">Buscar!</button>  
 		</span>   
 	</div><br>  
-	<div class="list-group">    
-		<button type="button" class="list-group-item"> México 3 días</button>    
-		<button type="button" class="list-group-item"> Córdiba 1 semana</button>    
-		<button type="button" class="list-group-item"> Crucero Miami</button>    
+	<div class="list-group"> 
+		<button type="button" class="list-group-item" ng-repeat="campana in campanas" 
+				ui-sref="campana({ campanaId: campana.id })"> 
+			{{campana.title}} {{campana.id}}
+			<span class="icon-angle-right pull-right">></span>
+		</button>    
 	</div>   
-	<button class="btn btn-default" type="button">Nueva</button>  
+	<button class="btn btn-default" type="button">Nueva</button>
+	<ui-view></ui-view>
 </div> 

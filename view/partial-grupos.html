@@ -1,4 +1,4 @@
-<div class="input-group">
+<div class="input-group" ng-controller="GruposController">
 	<h1>Tus Grupos</h1>
 	<div class="input-group">  
 		<input type="text" class="form-control" placeholder="Grupos...">  
@@ -7,9 +7,14 @@
 		</span>   
 	</div><br>
 	<div class="list-group">
-	 	<input type="text" class="form-control" placeholder="Search">
-		<button type="button" class="list-group-item"> Adultos La Plata</button> 
-		<button type="button" class="list-group-item"> Colegas</button>
-		<button type="button" class="list-group-item"> Padres</button>
+		<div class="list-group" ng-repeat="grupo in grupos">
+			<button type="button" class="list-group-item"> {{grupo.title}}
+			<span class="icon-angle-right pull-right">></span>
+			<ul>
+				<li ng-repeat="cliente in grupo.clientes">{{cliente}}</li>
+			</ul>
+			</button>
+		</div>
 	</div>
+	<button class="btn btn-default" type="button">Nuevo</button> 
 </div>
