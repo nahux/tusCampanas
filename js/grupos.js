@@ -3,7 +3,8 @@ var grupoService =
 angular.module('inicio').service("GruposService", ["$q", "$timeout", function($q, $timeout) {
 	var clientes = [{"juan": {nombre: "Juan", apellido: "Pérez"}, "marcos": {nombre: "Marcos", apellido: "Pérez"}} ]
 	var grupos = 
-				[{	title: "Adultos", 
+				[{	id: 1,
+					title: "Adultos", 
 					desc: "Adultos, de 18 a 80 años", 
 					clientes: {
 								"cliente1":"Juan",
@@ -11,7 +12,8 @@ angular.module('inicio').service("GruposService", ["$q", "$timeout", function($q
 					}
 				 },
 				 {
-				 	title: "Adultos La Plata", 
+					id: 2,
+					title: "Adultos La Plata", 
 					desc: "Adultos de La Plata, de 18 a 80 años", 
 					clientes: {
 								"cliente1":"Lorena",
@@ -27,6 +29,16 @@ angular.module('inicio').service("GruposService", ["$q", "$timeout", function($q
 		}, 1000); 
 		
 		return deferred.promise; 
+	}
+
+	this.getGrupo = function(idGrupo) {
+		var deferred = $q.defer();
+		
+		//Averiguar porqué no anda con promise
+		$timeout(function() {
+			deferred.resolve(grupos.find(x => x.id == idGrupo));
+		}, 500);
+		return grupos.find(x => x.id == idGrupo);  
 	}
 }]);
 
@@ -48,3 +60,11 @@ angular.module('inicio').component('compGrupos', {
 	
 	templateUrl: 'partial-grupos.html'
 });
+////////////////////////////////////////////
+
+//DETALLE
+//Controller grupo
+angular.module('inicio').controller("DetalleGrupoController", ["$scope", "GruposService", "$state", "$stateParams", function($scope, GruposService,$state,$stateParams) {
+	// model
+	$scope.grupo = GruposService.getGrupo($stateParams.id);	
+}]);

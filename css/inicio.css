@@ -55,8 +55,7 @@ html, body {
 	float: left;
 }
 .bloqueDerecha{
-	float: right;
-	margin-right: 50%;
-    margin-top: 5%;
+	margin-right: 2%;
+	margin-left: 30%;
 }
 /* FIN DASHBOARD */

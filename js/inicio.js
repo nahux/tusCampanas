@@ -15,13 +15,13 @@ app.controller('loginCtrl', function($scope) {
 
 //Componentes Inicio
 angular.module('inicio').component('compAbout', {
-  template:  '<h3>¡Bienvenido a {{$ctrl.titulo}}!</h3>' +
+	template:  '<h3>¡Bienvenido a {{$ctrl.titulo}}!</h3>' +
 			 '<p> {{$ctrl.mensaje}} </p>',
-		   
-  controller: function() {
+			 
+	controller: function() {
 	this.titulo = 'TusCampañas';
 	this.mensaje = 'En Tus campañas usted puede promocionar sus productos o servicios de una manera eficiente y fácil de usar.';
-  }
+	}
 })
 
 
@@ -50,21 +50,20 @@ app.config(function($stateProvider){
 		url: '/campanas',
 		component: 'compCamp',
 		resolve: {
-		campanas: function(CampanasService) {
-		  return CampanasService.getCampanas();
+			campanas: function(CampanasService) {
+				return CampanasService.getCampanas();
+			}
 		}
-	  }
 	}
 
 	var campanaState = {
-		name: 'campana', 
-		url: '/campanas/{campanaId}', 
-		component: 'compCampana',
-		resolve: {
-			campana: function(CampanasService, $stateParams) {
-				return CampanasService.getCampana($stateParams.campanaId);
-			}
-		}
+		name: 'campanas.detalle', 
+		url: '/:id', 
+		views: {
+						'detalleCampana': {
+								templateUrl: 'partial-campana.html',
+							}
+						},
 	}
 
 	var gruposState = {
@@ -73,14 +72,24 @@ app.config(function($stateProvider){
 		component: 'compGrupos',
 		resolve: {
 			grupos: function(GruposService) {
-			  return GruposService.getGrupos();
+				return GruposService.getGrupos();
+			}
 		}
-	  }
+	}
+	var grupoState = {
+		name: 'grupos.detalle', 
+		url: '/:id', 
+		views: {
+						'detalleGrupo': {
+								templateUrl: 'partial-grupo.html',
+							}
+						},
 	}
 	
 	//Registro los states
 	$stateProvider.state(campanasState);
 	$stateProvider.state(campanaState);
 	$stateProvider.state(gruposState);
+	$stateProvider.state(grupoState);
 	////////////////////
 });

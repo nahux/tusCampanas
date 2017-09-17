@@ -1,10 +1,16 @@
-<div class="bloqueDerecha panel panel-default" ng-controller="CampanasController">
-	<div class="panel-heading">{{$ctrl.hola.title}}</div>
+<div class="bloqueDerecha panel panel-default" ng-controller="DetalleCampController">
+	<div class="panel-heading">{{campana.title}}</div>
 	<div class="panel-body">
 		<h4>Título</h4>
 		<p>{{campana.title}}</p>
 		<h4>Descripción</h4>
 		<p>{{campana.desc}} </p>
+		<h4>Vista Previa</h4>
+		<img src="" alt="" width="50px" height="50px">
+		<h4>Grupos</h4>
+		<ul>
+			<li ng-repeat="grupo in campana.grupos">{{grupo}}</li>
+		</ul>
 		<br>
 		<button class="btn btn-default">Editar</button>
 		<button style="margin-left:25px" class="btn btn-default">Borrar</button>

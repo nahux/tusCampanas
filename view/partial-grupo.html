@@ -1,0 +1,16 @@
+<div class="bloqueDerecha panel panel-default" ng-controller="DetalleGrupoController">
+	<div class="panel-heading">{{grupo.title}}</div>
+	<div class="panel-body">
+		<h4>Título</h4>
+		<p>{{grupo.title}}</p>
+		<h4>Descripción</h4>
+		<p>{{grupo.desc}} </p>
+		<h4>Clientes</h4>
+		<ul>
+			<li ng-repeat="cliente in grupo.clientes">{{cliente}}</li>
+		</ul>
+		<br>
+		<button class="btn btn-default">Editar</button>
+		<button style="margin-left:25px" class="btn btn-default">Borrar</button>
+	</div>
+</div>
