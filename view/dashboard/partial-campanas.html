@@ -4,15 +4,15 @@
 		<input type="text" class="form-control" placeholder="Campañas...">  
 		<span class="input-group-btn">  
 			<button class="btn btn-default" type="button">Buscar!</button>  
-		</span>   
+		</span>
 	</div><br>  
 	<div class="list-group"> 
 		<button type="button" class="list-group-item" ng-repeat="campana in campanas" 
 				ui-sref="campanas.detalle({ id: campana.id })"> 
 			{{campana.title}} {{campana.id}}
 			<span class="icon-angle-right pull-right">></span>
-		</button>    
-	</div>   
+		</button>
+	</div>
 	<button class="btn btn-default" type="button">Nueva</button>
 </div>
 <div ui-view="detalleCampana"></div> 

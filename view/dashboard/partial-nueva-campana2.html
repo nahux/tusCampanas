@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="inicio">
+<head>
+	<title>TusCampañas - Mi área de trabajo</title>
+	<meta charset="utf-8">
+	<!-- Angular -->
+	<script type="text/javascript" src="../../js/angular.min.js"></script>
+	<script type="text/javascript" src="../../js/angular-ui-router.js"></script>
+	<script src="../../js/inicio.js"></script>
+	<script src="../../js/campanas.js"></script>
+	<script src="../../js/grupos.js"></script>
+	<!-- Bootstrap -->
+	<link href="../../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../css/inicio.css" rel="stylesheet">
+
+	<style>.active { color: red; font-weight: bolder; } .nav {text-decoration: none} html {font-family: arial}</style>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">
+					<img alt="TusCampañas" src="">
+				</a>
+				
+				<p class="navbar-right navbar-text"> <a href="index.html" class="navbar-link" >Salir</a></p>
+			</div>
+		</div>
+	</nav>
+
+	<div class="contenidoIniciarSesion">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="btn-group btn-group-lg" role="group">
+					<a ui-sref="campanas" class="btn btn-default" ui-sref-active="active">Campañas</a>
+					<a ui-sref="grupos" class="btn btn-default" ui-sref-active="active">Grupos</a>
+					<a ui-sref="tracking" class="btn btn-default" ui-sref-active="active">Tracking</a>
+				</div>
+			</div>
+			<div style="text-align: left" class="panel-body">
+				<!-- Aca va el contenido -->
+				<div ui-view=""></div>
+
+				<div ng-controller="CampanasController">
+					<h1>Elegir Grupos</h1><br>
+					<label>Ingrese destinatarios de la campaña</label>
+					<input type="text" style="width: 20%" class="form-control" placeholder="Grupos...">  
+					<span class="input-group-btn">  
+						<button class="btn btn-default" type="button">Buscar!</button>  
+					</span><br>
+					<div class="input-group">
+
+						<!-- Debería recibir la campaña de pantalla anterior -->
+						<form name="form-camp" id="form-campId" action="dashboard/dashboard.html" method="post" novalidate>
+							<input type="checkbox" ng-repeat="grupo in grupos" name="list" id="{{grupo.id}}" value="{{grupo}}">grupo.title<br>
+							<a ui-sref=ui-sref="nuevaCampana({ campana: campana })" class="btn btn-default"><- Atras</a>
+							<a ui-sref="diseñarCampana({ campana: campana })" onclick="validarCheck()" class="btn btn-default">Siguiente -></a>
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- Validación checkboxes -->
+	<script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript">
+		function validarCheck() 
+		{ 
+				var fields = $("input[name='list']").serializeArray(); 
+				if (fields.length === 0) 
+				{ 
+						alert('Debe seleccionar al menos un grupo'); 
+						// cancel submit
+						return false;
+				} 
+				else 
+				{ 
+						alert(fields.length + " items selected"); 
+				}
+		}
+
+		// register event on form, not submit button
+		$('#form-campId').submit(validarCheck)
+	</script>
+</body>
+</html>

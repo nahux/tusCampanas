@@ -1,0 +1,10 @@
+18/9
+hacer linkeos con tracking y que funcione minimamente para cada campaña
+finalizar el nueva campaña y nuevo grupo con los templates hechos
+checkear lo de porqué no funciona promises en servicios, getGrupo y getCampana
+
+metodos nueva campaña:
+nuevaCampana(campana) //con campana vacía al principio
+elegirGrupos(campana)
+diseñarCampana(campana)
+enviarCampana(campana) //debería crear la campaña en el modelo, crear el tracking y enviarla

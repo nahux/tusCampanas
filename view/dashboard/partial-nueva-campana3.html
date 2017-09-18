@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="inicio">
+<head>
+	<title>TusCampañas - Mi área de trabajo</title>
+	<meta charset="utf-8">
+	<!-- Angular -->
+	<script type="text/javascript" src="../../js/angular.min.js"></script>
+	<script type="text/javascript" src="../../js/angular-ui-router.js"></script>
+	<script src="../../js/inicio.js"></script>
+	<script src="../../js/campanas.js"></script>
+	<script src="../../js/grupos.js"></script>
+	<!-- Bootstrap -->
+	<link href="../../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../css/inicio.css" rel="stylesheet">
+
+	<style>.active { color: red; font-weight: bolder; } .nav {text-decoration: none} html {font-family: arial}</style>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">
+					<img alt="TusCampañas" src="">
+				</a>
+				
+				<p class="navbar-right navbar-text"> <a href="index.html" class="navbar-link" >Salir</a></p>
+			</div>
+		</div>
+	</nav>
+
+	<div class="contenidoIniciarSesion">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="btn-group btn-group-lg" role="group">
+					<a ui-sref="campanas" class="btn btn-default" ui-sref-active="active">Campañas</a>
+					<a ui-sref="grupos" class="btn btn-default" ui-sref-active="active">Grupos</a>
+					<a ui-sref="tracking" class="btn btn-default" ui-sref-active="active">Tracking</a>
+				</div>
+			</div>
+			<div style="text-align: left" class="panel-body">
+				<!-- Aca va el contenido -->
+				<div ui-view=""></div>
+
+				<div ng-controller="CampanasController">
+					<h1>Diseñar Campaña</h1><br>
+					<h4>Realice el diseño de la campaña</h4>
+
+					
+					<div class="input-group">
+						<!-- Debería recibir la campaña de pantalla anterior -->
+						<form name="form-camp" action="dashboard/dashboard.html" method="post" novalidate>
+							<div class="panel panel-default">
+								<div class="panel-heading">campana.title</div>
+								<div class="panel-body">
+									<img src="" width="80px" height="100px">
+									<h2>campana.title</h2>
+									<h4>campana.desc</h4>
+								</div>
+							</div>
+							<a ui-sref=ui-sref="elegirGrupos({ campana: campana })" class="btn btn-default"><- Atras</a>
+						 	<button type="submit" class="btn btn-default" ui-sref="enviarCampana({ campana: campana })">Enviar -></button>
+						</form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
