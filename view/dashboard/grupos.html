@@ -8,7 +8,7 @@
 	</div><br>
 	<div class="list-group">
 		<div class="list-group" ng-repeat="grupo in grupos">
-			<button type="button" class="list-group-item" ui-sref="grupos.detalle({ id: grupo.id })"> 
+			<button type="button" class="list-group-item" ui-sref="dashboard.grupos.detalle({ id: grupo.id })"> 
 				{{grupo.title}} 
 				<span class="icon-angle-right pull-right">></span>
 			</button>
@@ -16,4 +16,4 @@
 	</div>
 	<button class="btn btn-default" type="button">Nuevo</button> 
 </div>
-<div ui-view="detalleGrupo"></div> 
+<div ui-view=""></div> 

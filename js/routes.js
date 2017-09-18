@@ -29,35 +29,31 @@ angular
 		$stateProvider
 			.state('dashboard.campanas', {
 				url: '/campanas',
-				component: 'compCamp',
+				component: 'campanas',
 			});
 
 			$stateProvider
 			.state('dashboard.campanas.detalle', {
 				url: '/:id', 
-				views: 
-					{
-						'detalleCampana': {
-							templateUrl: 'partial-campana.html',
-						}
-					}
+				component: 'campanaDetalle'
 			});
 
 		//Estados Grupos
 		$stateProvider
 			.state('dashboard.grupos', {
 				url: '/grupos',
-				component: 'compGrupos',
+				component: 'grupos',
 		});
 
 		$stateProvider
 			.state('dashboard.grupos.detalle', { 
-				url: '/:id', 
-				views: 
+				url: '/:id',
+				component: 'grupoDetalle'
+				/*views: 
 					{
 						'detalleGrupo': {
 							templateUrl: 'partial-grupo.html',
 						}
-					},
+					},*/
 		});
 }
