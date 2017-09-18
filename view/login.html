@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html ng-app="inicio">
-<head>
-	<title>TusCampañas - Iniciar Sesión</title>
-	<meta charset="utf-8">
-	<!-- Angular -->
-	<script type="text/javascript" src="../js/angular.min.js"></script>
-	<script type="text/javascript" src="../js/angular-ui-router.js"></script>
-	<script src="../js/inicio.js"></script>
-	<!-- Bootstrap -->
-	<link href="../css/bootstrap.min.css" rel="stylesheet">
-	<link href="../css/inicio.css" rel="stylesheet">
-	<style>.active { color: red; font-weight: bolder; } .nav {text-decoration: none} html {font-family: arial}</style>
-</head>
-
-<body ng-controller="loginCtrl">
-
-<div class="contenidoIniciarSesion">
+<div class="contenidoIniciarSesion" ng-controller="loginController">
 		
 	<div class="form input-group">
 		<h1>Iniciar Sesión</h1><br>
@@ -29,16 +12,13 @@
 			<input type="password" name="pass" ng-model="user.pass" class="form-control" required><br><br><br>
 			<p ng-show="login.pass.$touched && login.pass.$invalid" style="color:red">Debe ingresar una contraseña</p>
 
-			<button type="submit" class="btn btn-default" ng-disabled="login.name.$invalid || login.pass.$invalid" ng-click="validateLogin(user)">Entrar</button>
+			<!--<button type="submit" class="btn btn-default" ng-disabled="login.name.$invalid || login.pass.$invalid" ng-click="validateLogin(user)">Entrar</button>-->
 			
 			<a href="#" style="margin-left: 20px">¡Regístrese aquí!</a><br>
 			<br><br>
 		</form>
+		<a class="btn btn-default" ui-sref="dashboard.campanas" role="button" ng-click="validateLogin(user)">Entrar</a>
 		<!--  -->
-		<a href="index.html"><-- Salir</a> 
+		<a ui-sref="inicio"><-- Salir</a> 
 	</div>
 </div>
-
-</body>
-
-</html>

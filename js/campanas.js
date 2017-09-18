@@ -42,7 +42,7 @@ angular.module('inicio').service("CampanasService", ["$q", "$timeout", function(
 //////
 
 //Controller campañas
-var campanasCtrl =
+var CampanasController =
 angular.module('inicio').controller("CampanasController", ["$scope", "CampanasService", function($scope, campService) {
 	// model
 	$scope.refreshCampanas = function() {
@@ -55,10 +55,10 @@ angular.module('inicio').controller("CampanasController", ["$scope", "CampanasSe
 }]);
 
 //Componente campañas
-angular.module('inicio').component('compCamp', {
-	bindings: { campanas: '<' },
-	
-	templateUrl: 'partial-campanas.html'
+angular
+	.module('inicio')
+	.component('dashboard.campana', {
+		templateUrl: 'dashboard/campanas.html'
 });
 ////////////////////////////////////////////////////////////////////
 

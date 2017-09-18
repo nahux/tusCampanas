@@ -1,46 +1,25 @@
 <!DOCTYPE html>
-<html ng-app="inicio">
+<html>
 <head>
 	<title>TusCampañas</title>
 	<meta charset="utf-8">
 	<!-- Angular -->
 	<script type="text/javascript" src="../js/angular.min.js"></script>
 	<script type="text/javascript" src="../js/angular-ui-router.js"></script>
+	<script src="../js/index.js"></script>
+	<script src="../js/routes.js"></script>
 	<script src="../js/inicio.js"></script>
-	<!-- Bootstrap -->
+	<script src="../js/login.js"></script>
+	<script src="../js/dashboard.js"></script>
+	<script src="../js/campanas.js"></script>
+
+	
+	<!-- CSS-->
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
 	<link href="../css/inicio.css" rel="stylesheet">
 	<style>.active { color: red; font-weight: bolder; } .nav {text-decoration: none} html {font-family: arial}</style>
 </head>
-<body ng-controller="inicioCtrl">
-	<!-- Botones top -->
-	<div>
-		<div class="botonesTopIzq">
-			<img src="" width="20px" height="20px" style="float:left">
-			<a ui-sref="about" class="nav" ui-sref-active="active">¿Qué es?</a>
-		</div>
-		<div class="botonesTopDer">
-			<!--
-			<a ui-sref="inicio" class="nav" ui-sref-active="active">Entrar</a> -->
-			<a href="login.html" class="nav" ui-sref-active="active">Entrar</a>
-		</div>
-	</div>
-
-	<!-- Contenido -->
-	<div class="contenido">
-		<div class="jumbotron" style="text-align: center">
-			<img src="" width="500px" height="100px">
-			<h1>TusCampañas</h1>
-			<p>TusCampañas es un sitio donde puedes gestionar tus campañas de marketing de la manera más fácil<p>
-			<p><a class="botonComienza btn btn-default" href="login.html" role="button">Comienza aquí</a></p>
-		</div>
-		<hr style="border-top: 5px solid #c1cee0;">
-		<div>
-			<p style="text-align: center"><ui-view></ui-view></p>
-		</div>
-	</div>
-
-	
-
+<body ng-app="inicio">
+	<ui-view></ui-view>
 </body>
 </html>
