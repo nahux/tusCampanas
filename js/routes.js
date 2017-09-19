@@ -32,10 +32,17 @@ angular
 				component: 'campanas',
 			});
 
-			$stateProvider
+		$stateProvider
 			.state('dashboard.campanas.detalle', {
 				url: '/:id', 
 				component: 'campanaDetalle'
+			});
+
+		$stateProvider
+			.state('dashboard.campanas.nueva', {
+				url: '/nueva',
+				templateUrl: 'dashboard/nueva_campana.html'
+				//component: 'nueva_campana'
 			});
 
 		//Estados Grupos
@@ -43,13 +50,13 @@ angular
 			.state('dashboard.grupos', {
 				url: '/grupos',
 				component: 'grupos',
-		});
+			});
 
 		$stateProvider
 			.state('dashboard.grupos.detalle', { 
 				url: '/:id',
 				component: 'grupoDetalle'
-		});
+			});
 
 		//Estados tracking
 		$stateProvider

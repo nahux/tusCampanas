@@ -1,0 +1,22 @@
+<div class="bloqueDerecha panel panel-default" ng-controller="NuevaCampController">
+	
+	<div class="panel-heading">
+		<span style="margin-top: -10px;" class="icon-angle-right pull-right">
+			<a ui-sref="dashboard.campanas">x</a>
+		</span>
+	</div>
+	<div class="panel-body">
+	<h1>Nueva Campaña</h1><br>
+		<div class="input-group">
+			<!-- Debería recibir una campaña vacía -->
+			<form name="form-camp" action="dashboard/dashboard.html" method="post" novalidate>
+			 <label>Título</label>
+			 <input type="text" name="titulo" ng-model="campana.title" placeholder="Ingrese un título" class="form-control" required><br><br><br>
+			 <label>Descripción</label>
+			 <input type="text" name="desc" ng-model="campana.desc" placeholder="Ingrese una descripción" class="form-control" required><br><br><br><br>
+			 <button type="submit" class="btn btn-default" ui-sref="dashboard.campanas"><- Atras</button>
+			 <button type="submit" class="btn btn-default" ng-disabled="form-camp.titulo.$invalid || form-camp.desc.$invalid" ui-sref="elegirGrupos({ campana: campana })">Siguiente -></button>
+			</form>
+		</div>
+	</div>
+</div>

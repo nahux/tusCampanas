@@ -1,4 +1,4 @@
-<div ng-controller="TrackingController">
+<div class="bloqueIzquierda input-group" ng-controller="TrackingController">
 	<h1>Trackings</h1>
 	<div class="input-group">  
 		<input type="text" style="" class="form-control" placeholder="Campañas...">  
@@ -8,7 +8,7 @@
 	</div><br>
 
 	<!-- partial-tracking -->
-	<div class="bloqueIzquierda list-group"> 
+	<div class="list-group"> 
 		<button type="button" class="list-group-item" ng-repeat="tracking in trackings" 
 				ui-sref="dashboard.tracking.detalle({ id: tracking.id_campana })"> 
 			{{tracking.id}} - {{tracking.title}}

@@ -2,31 +2,32 @@
 angular
 	.module('inicio')
 	.service("CampanasService", ["$q", "$timeout", function($q, $timeout) {
-		var campanas = [{
-											id: 1,
-											title: "México 3 días", 
-											desc: "Vacaciones en México 3 días",
-											grupos: {
-												"2":"Adultos"
-											}
-										},
-										{
-											id: 2,
-											title: "Europa 21 días", 
-											desc: "Vacaciones en Alemania, Francia e Italia en 21 días",
-											grupos: {
-												"1":"Adultos La Plata"
-											}
-										},
-										{
-											id: 3,
-											title: "Camboya 5 días", 
-											desc: "Vacaciones en Camboya en 5 días",
-											grupos: {
-												"1":"Adultos La Plata"
-											}
-										}];
-		
+		var campanas = 
+			[{
+				id: 1,
+				title: "México 3 días", 
+				desc: "Vacaciones en México 3 días",
+				grupos: {
+					"2":"Adultos"
+				}
+			},
+			{
+				id: 2,
+				title: "Europa 21 días", 
+				desc: "Vacaciones en Alemania, Francia e Italia en 21 días",
+				grupos: {
+					"1":"Adultos La Plata"
+				}
+			},
+			{
+				id: 3,
+				title: "Camboya 5 días", 
+				desc: "Vacaciones en Camboya en 5 días",
+				grupos: {
+					"1":"Adultos La Plata"
+				}
+			}];
+
 		this.getCampanas = function() {
 			var deferred = $q.defer();
 			
@@ -80,6 +81,7 @@ angular
 	.component('campanaDetalle', {
 		templateUrl: 'dashboard/campana_detalle.html'
 });
+
 //Controller campaña
 angular
 	.module('inicio')
@@ -91,4 +93,22 @@ angular
 			});  
 		}
 		$scope.refreshCampana();
+}]);
+
+
+////////////////////////////////////////////////////////////////////
+
+//NUEVA CAMPAÑA
+//Componente nueva
+angular
+	.module('inicio')
+	.component('nueva_campana', {
+		template: '<h1>HOLA</h1>'
+		//templateUrl: 'dashboard/nueva_campana.html'
+});
+
+angular
+	.module('inicio')
+	.controller("NuevaCampController", ["$scope", "CampanasService", "$state", "$stateParams", function($scope, CampanasService, $state, $stateParams) {
+
 }]);

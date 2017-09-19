@@ -54,8 +54,17 @@ html, body {
 .bloqueIzquierda {
 	float: left;
 }
-.bloqueDerecha{
-	margin-right: 2%;
-	margin-left: 30%;
-}
+
+@media (min-width: 1000px) {
+	.bloqueDerecha{
+		margin-right: 2%;
+		margin-left: 30%;
+	}
+ }
+ @media (max-width: 1000px) {
+	.bloqueDerecha{
+		margin-right: 2%;
+		margin-left: 2%;
+	}
+ }
 /* FIN DASHBOARD */
