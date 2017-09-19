@@ -17,6 +17,14 @@ angular
 											grupos: {
 												"1":"Adultos La Plata"
 											}
+										},
+										{
+											id: 3,
+											title: "Camboya 5 días", 
+											desc: "Vacaciones en Camboya en 5 días",
+											grupos: {
+												"1":"Adultos La Plata"
+											}
 										}];
 		
 		this.getCampanas = function() {

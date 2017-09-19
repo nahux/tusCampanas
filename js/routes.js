@@ -49,11 +49,18 @@ angular
 			.state('dashboard.grupos.detalle', { 
 				url: '/:id',
 				component: 'grupoDetalle'
-				/*views: 
-					{
-						'detalleGrupo': {
-							templateUrl: 'partial-grupo.html',
-						}
-					},*/
 		});
+
+		//Estados tracking
+		$stateProvider
+			.state('dashboard.tracking', {
+				url:'/tracking',
+				component: 'tracking'
+			});
+
+		$stateProvider
+			.state('dashboard.tracking.detalle', {
+				url:'/:id',
+				component: 'trackingDetalle'
+			});
 }

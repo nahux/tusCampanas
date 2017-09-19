@@ -1,0 +1,19 @@
+<div ng-controller="TrackingController">
+	<h1>Trackings</h1>
+	<div class="input-group">  
+		<input type="text" style="" class="form-control" placeholder="Campañas...">  
+		<span class="input-group-btn">  
+			<button class="btn btn-default" type="button">Buscar!</button>  
+		</span>   
+	</div><br>
+
+	<!-- partial-tracking -->
+	<div class="bloqueIzquierda list-group"> 
+		<button type="button" class="list-group-item" ng-repeat="tracking in trackings" 
+				ui-sref="dashboard.tracking.detalle({ id: tracking.id_campana })"> 
+			{{tracking.id}} - {{tracking.title}}
+			<span class="icon-angle-right pull-right">></span>
+		</button>
+	</div>
+</div>
+<div ui-view=""></div>
