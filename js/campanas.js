@@ -41,13 +41,40 @@ angular
 		this.getCampana = function(idCamp) {
 			var deferred = $q.defer();
 			
-			//Averiguar porqué no anda con promise
 			$timeout(function() {
 				deferred.resolve(campanas.find(x => x.id == idCamp));
 			}, 500);
 			return deferred.promise;  
 		}
 
+		//Para nueva campaña
+		var campanaNueva = {};
+		this.addTitleDesc = function (campana) {
+			campanaNueva.title = campana.title;
+			campanaNueva.desc = campana.desc;
+		}
+
+		this.addGrupos = function (grupos) {
+			campanaNueva.grupos = grupos;
+		}
+
+		this.getNuevaCampana = function() {
+			var deferred = $q.defer();
+			
+			$timeout(function() {
+				deferred.resolve(campanaNueva);
+			}, 500);
+			return deferred.promise;  
+		}
+
+		this.addCampana = function(campana) {
+			var deferred = $q.defer();
+			
+			$timeout(function() {
+				deferred.resolve(campanas.push(campana));
+			}, 500);
+			return deferred.promise;  
+		}
 }]);
 //////
 
@@ -102,13 +129,46 @@ angular
 //Componente nueva
 angular
 	.module('inicio')
-	.component('nueva_campana', {
-		template: '<h1>HOLA</h1>'
-		//templateUrl: 'dashboard/nueva_campana.html'
+	.component('nuevaCampana', {
+		templateUrl: 'dashboard/nueva_campana.html'
 });
 
+//Componente nueva2
 angular
 	.module('inicio')
-	.controller("NuevaCampController", ["$scope", "CampanasService", "$state", "$stateParams", function($scope, CampanasService, $state, $stateParams) {
+	.component('nuevaCampana2', {
+		templateUrl: 'dashboard/nueva_campana_grupos.html'
+});
 
+//Controller
+angular
+	.module('inicio')
+	.controller("NuevaCampController", ["$scope", "CampanasService", "GruposService", "$state", "$stateParams",
+										function($scope, CampanasService, GruposService, $state, $stateParams) {
+
+		$scope.campana = {};
+		//$scope.grupos = [{id:1, title: "grupo1"},{id:2, title: "grupo2"}];
+
+		$scope.addTitleDesc = function (campana) {
+			CampanasService.addTitleDesc(campana);
+			$scope.refreshNuevaCampana();
+		}
+
+		$scope.refreshNuevaCampana = function() {
+			CampanasService.getNuevaCampana().then(function(campana) {
+				$scope.campana = campana;
+			});  
+		}
+		$scope.refreshNuevaCampana();
+
+
+
+		//Elegir Grupos
+		$scope.refreshGrupos = function() {
+			GruposService.getGrupos().then(function(grupos) {
+				$scope.grupos = grupos;
+			});  
+		}
+		$scope.refreshGrupos();
+		
 }]);

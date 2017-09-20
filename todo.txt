@@ -1,4 +1,4 @@
-18/9
+18/9:
 hacer linkeos con tracking y que funcione minimamente para cada campaña
 finalizar el nueva campaña y nuevo grupo con los templates hechos
 checkear lo de porqué no funciona promises en servicios, getGrupo y getCampana
@@ -8,3 +8,11 @@ nuevaCampana(campana) //con campana vacía al principio
 elegirGrupos(campana)
 diseñarCampana(campana)
 enviarCampana(campana) //debería crear la campaña en el modelo, crear el tracking y enviarla
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+20/9:
+
+hacer que funcione chart en tracking
+finalizar el nueva campaña y nuevo grupo con los templates hechos
+
+PREGUNTAR COMO HACER PARA ELEGIR LOS GRUPOS EN LA VISTA :(

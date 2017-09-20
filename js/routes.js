@@ -40,10 +40,15 @@ angular
 
 		$stateProvider
 			.state('dashboard.campanas.nueva', {
-				url: '/nueva',
-				templateUrl: 'dashboard/nueva_campana.html'
-				//component: 'nueva_campana'
+				url: '/nueva',		
+				component: 'nuevaCampana',
 			});
+
+		$stateProvider
+			.state('dashboard.campanas.nueva2', {
+				url: '/nueva_grupos',		
+				component: 'nuevaCampana2',
+			})
 
 		//Estados Grupos
 		$stateProvider

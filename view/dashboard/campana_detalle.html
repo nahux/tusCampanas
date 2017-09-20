@@ -1,5 +1,10 @@
 <div class="bloqueDerecha panel panel-default" ng-controller="DetalleCampController">
-	<div class="panel-heading">{{campana.title}}</div>
+	<div class="panel-heading">
+		{{campana.title}}
+		<span style="" class="icon-angle-right pull-right">
+			<a ui-sref="dashboard.campanas" style="color:black; text-decoration: none;">X</a>
+		</span>
+	</div>
 	<div class="panel-body">
 		<h4>Título</h4>
 		<p>{{campana.title}}</p>
