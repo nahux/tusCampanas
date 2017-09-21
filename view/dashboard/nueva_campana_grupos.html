@@ -17,31 +17,36 @@
 	</div><br>  
 		
 		<label>Grupos</label>
-		<div class="list-group">
-			<span ng-repeat="grupo in grupos">
-				<input type="checkbox" name="gruposList" id="{{grupo.id}}" ng-model="campana.grupos"> {{grupo.title}}<br>
-			</span><br>
-		</div>
+		<form name="form-camp" id="form-campId">
+			<div id="lista" class="list-group">
+				<span ng-repeat="grupo in grupos">
+					<input type="checkbox" name="gruposList" id="{{grupo.id}}" ng-model="campana.grupos[grupo.id]"
+					 ng-true-value="'{{grupo.id}}'" ng-false-value="''" id="'{{grupo.id}}'"> {{grupo.title}}<br>
+				</span><br>
+			</div>
 
-		<a class="btn btn-default" ui-sref="dashboard.campanas.nueva"><- Atras</a>
-		<a ui-sref="diseñarCampana({ campana: campana })" onclick="validarCheck()" class="btn btn-default">Siguiente -></a>
+			<a class="btn btn-default" ui-sref="dashboard.campanas.nueva"><- Atras</a>
+			<button type="submit" ui-sref="dashboard.campanas.nueva3" ng-disabled="!campana.grupos" onclick="validarCheck()" class="btn btn-default">Siguiente -></a>
+		</form>
 	</div>
 
 
 <!-- Validación checkboxes -->
 <script type="text/javascript">
 	function validarCheck() 
-	{ 
+	{
 			var fields = $("input[name='gruposList']").serializeArray(); 
-			if (fields.length === 0) 
+			if (fields.length === 0)
 			{ 
-					alert('Debe seleccionar al menos un grupo'); 
+					if ($("#errorMsg").length === 0){
+						$("#lista").append('<p id="errorMsg" style="color:red;">Debe seleccionar al menos un grupo</p>');
+					}
 					// cancel submit
 					return false;
 			} 
 			else 
 			{ 
-					alert(fields.length + " items selected"); 
+					//alert(fields.length + " items selected"); 
 			}
 	}
 

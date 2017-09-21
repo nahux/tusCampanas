@@ -75,6 +75,11 @@ angular
 			}, 500);
 			return deferred.promise;  
 		}
+
+		this.setId = function() {
+			campanaNueva.id = Math, campanas.map(function(o){ return o.id });
+		}
+
 }]);
 //////
 
@@ -140,6 +145,13 @@ angular
 		templateUrl: 'dashboard/nueva_campana_grupos.html'
 });
 
+//Componente nueva2
+angular
+	.module('inicio')
+	.component('nuevaCampana3', {
+		templateUrl: 'dashboard/nueva_campana_disenar.html'
+});
+
 //Controller
 angular
 	.module('inicio')
@@ -147,7 +159,10 @@ angular
 										function($scope, CampanasService, GruposService, $state, $stateParams) {
 
 		$scope.campana = {};
-		//$scope.grupos = [{id:1, title: "grupo1"},{id:2, title: "grupo2"}];
+
+		$scope.setId = function (){
+			CampanasService.setId();
+		}
 
 		$scope.addTitleDesc = function (campana) {
 			CampanasService.addTitleDesc(campana);
@@ -161,8 +176,6 @@ angular
 		}
 		$scope.refreshNuevaCampana();
 
-
-
 		//Elegir Grupos
 		$scope.refreshGrupos = function() {
 			GruposService.getGrupos().then(function(grupos) {
@@ -171,4 +184,10 @@ angular
 		}
 		$scope.refreshGrupos();
 		
+
+		$scope.addCampana = function(campana) {
+			CampanasService.addCampana(campana).then(function() {
+			});
+		}
+
 }]);

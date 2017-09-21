@@ -48,7 +48,13 @@ angular
 			.state('dashboard.campanas.nueva2', {
 				url: '/nueva_grupos',		
 				component: 'nuevaCampana2',
-			})
+			});
+
+		$stateProvider
+			.state('dashboard.campanas.nueva3', {
+				url: '/nueva_disenar',		
+				component: 'nuevaCampana3',
+			});
 
 		//Estados Grupos
 		$stateProvider

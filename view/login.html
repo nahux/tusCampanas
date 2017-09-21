@@ -14,11 +14,11 @@
 
 			<!--<button type="submit" class="btn btn-default" ng-disabled="login.name.$invalid || login.pass.$invalid" ng-click="validateLogin(user)">Entrar</button>-->
 			
-			<a href="#" style="margin-left: 20px">¡Regístrese aquí!</a><br>
-			<br><br>
+			<a href="#" >¡Regístrese aquí!</a><br>
+			<br>
 		</form>
-		<a class="btn btn-default" ui-sref="dashboard.campanas" role="button" ng-click="validateLogin(user)">Entrar</a>
+		<a class="btn btn-default" ng-disabled="login.name.$invalid || login.pass.$invalid"  ui-sref="dashboard.campanas" role="button" ng-click="validateLogin(user)">Entrar</a>
 		<!--  -->
-		<a ui-sref="inicio"><-- Salir</a> 
+		<a ui-sref="inicio" style="margin-left:20px"><-- Salir</a> 
 	</div>
 </div>
