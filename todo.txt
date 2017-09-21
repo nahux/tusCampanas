@@ -21,7 +21,6 @@ PREGUNTAR COMO HACER PARA ELEGIR LOS GRUPOS EN LA VISTA :(
 ///////////////////////////////////////////////////////////////////////////////////////////////
 21/9:
 
-hacer que funcione chart en tracking
 finalizar el nueva campaña(falta setear ids bien y grupos) y nuevo grupo con los templates hechos
 
 PREGUNTAR COMO HACER PARA ELEGIR LOS GRUPOS EN LA VISTA :(

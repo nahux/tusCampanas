@@ -80,10 +80,10 @@ angular
 		$scope.refreshTracking = function() {
 			TrackingService.getTracking($stateParams.id).then(function(tracking) {
 				$scope.tracking = tracking;
+				$scope.canvas(tracking);
 			});
 		}
-		$scope.canvas = function() {
-		  var tracking = $scope.tracking;
+		$scope.canvas = function(tracking) {
 			var popCanvas = $("#popChart");
 			var barChart = new Chart(popCanvas, {
 				type: 'bar',
@@ -91,7 +91,7 @@ angular
 					labels: ["Enviados", "Abiertos", "Errores"],
 					datasets: [{
 						label: 'Cantidad',
-						data: [35, 5 , 1],
+						data: [tracking.sent, tracking.opened , tracking.errors],
 						backgroundColor: [
 							'rgba(60, 142, 255, 1)',
 							'rgba(0, 128, 0, 1)',
@@ -103,6 +103,5 @@ angular
 				maintainAspectRatio: false
 			});
 		}
-		$scope.refreshTracking();
-		$scope.canvas();	
+		$scope.refreshTracking();	
 }]);

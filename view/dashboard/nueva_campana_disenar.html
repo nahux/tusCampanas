@@ -16,7 +16,7 @@
 						<img style="width:50%; height: auto;" src="../img/logo_camp.png" width="500px" height="500px">
 						<h2>{{campana.title}}</h2>
 						<h4>{{campana.desc}}</h4>
-						<div ng-repeat="grupo in campana.grupos">{{grupo}}hola</div>
+						<div ng-repeat="grupo in campana.grupos">{{grupo.id}}</div>
 					</div>
 				</div>
 				<a ui-sref="dashboard.campanas.nueva2" class="btn btn-default"><- Atras</a>

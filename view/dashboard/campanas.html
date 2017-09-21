@@ -1,15 +1,13 @@
 <div class="bloqueIzquierda input-group" ng-controller="CampanasController">    
 	<h1>Tus Campañas</h1>   
 	<div class="input-group">  
-		<input type="text" class="form-control" placeholder="Campañas...">  
-		<span class="input-group-btn">  
-			<button class="btn btn-default" type="button">Buscar!</button>  
-		</span>
+		<input type="text" class="form-control" ng-model="filtro" placeholder="Buscar Campañas...">  
+
 	</div><br>  
 	<div class="list-group"> 
-		<button type="button" class="list-group-item" ng-repeat="campana in campanas" 
+		<button type="button" class="list-group-item" ng-repeat="campana in campanas | filter : filtro" 
 				ui-sref="dashboard.campanas.detalle({ id: campana.id })"> 
-			{{campana.title}} {{campana.id}}
+			{{$index + 1}} - {{campana.title}}
 			<span class="icon-angle-right pull-right">></span>
 		</button>
 	</div>

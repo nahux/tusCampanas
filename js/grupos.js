@@ -35,12 +35,21 @@ angular
 		this.getGrupo = function(idGrupo) {
 			var deferred = $q.defer();
 			
-			//Averiguar porqué no anda con promise
 			$timeout(function() {
 				deferred.resolve(grupos.find(x => x.id == idGrupo));
 			}, 500);
 			return deferred.promise;  
 		}
+
+		this.getGruposCampana = function(campana) {
+			var gruposCamp = [];
+			for (var i = 0; i < campana.grupos.length; i++) {
+				var idGrupo = campana.grupos[i].id;
+				gruposCamp[i] = grupos.find(x => x.id == idGrupo).title
+			};
+			return gruposCamp;
+		}
+
 	}]);
 
 	//Controller grupos

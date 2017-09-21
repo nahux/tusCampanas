@@ -20,13 +20,13 @@
 		<form name="form-camp" id="form-campId">
 			<div id="lista" class="list-group">
 				<span ng-repeat="grupo in grupos">
-					<input type="checkbox" name="gruposList" id="{{grupo.id}}" ng-model="campana.grupos[grupo.id]"
+					<input type="checkbox" name="gruposList" id="{{grupo.id}}" ng-model="campana.grupos[$index].id"
 					 ng-true-value="'{{grupo.id}}'" ng-false-value="''" id="'{{grupo.id}}'"> {{grupo.title}}<br>
 				</span><br>
 			</div>
 
-			<a class="btn btn-default" ui-sref="dashboard.campanas.nueva"><- Atras</a>
-			<button type="submit" ui-sref="dashboard.campanas.nueva3" ng-disabled="!campana.grupos" onclick="validarCheck()" class="btn btn-default">Siguiente -></a>
+			<a class="btn btn-default" ui-sref="dashboard.campanas.nueva"> <- Atras</a>
+			<button type="submit" ui-sref="dashboard.campanas.nueva3" ng-click="addGrupos(campana.grupos)" ng-disabled="!campana.grupos" onclick="validarCheck()" class="btn btn-default">Siguiente -></a>
 		</form>
 	</div>
 
@@ -46,11 +46,12 @@
 			} 
 			else 
 			{ 
-					//alert(fields.length + " items selected"); 
+					$('#form-campId').submit();
+					return true;
 			}
 	}
 
 	// register event on form, not submit button
-	$('#form-campId').submit(validarCheck)
+	
 </script>
 </div>

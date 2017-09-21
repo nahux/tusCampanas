@@ -1,17 +1,13 @@
 <div class="bloqueIzquierda input-group" ng-controller="TrackingController">
 	<h1>Trackings</h1>
 	<div class="input-group">  
-		<input type="text" style="" class="form-control" placeholder="Campañas...">  
-		<span class="input-group-btn">  
-			<button class="btn btn-default" type="button">Buscar!</button>  
-		</span>   
+		<input type="text" ng-model="filtro" class="form-control" placeholder="Buscar Trackings...">  
 	</div><br>
 
-	<!-- partial-tracking -->
 	<div class="list-group"> 
-		<button type="button" class="list-group-item" ng-repeat="tracking in trackings" 
+		<button type="button" class="list-group-item" ng-repeat="tracking in trackings | filter: filtro" 
 				ui-sref="dashboard.tracking.detalle({ id: tracking.id_campana })"> 
-			{{tracking.id}} - {{tracking.title}}
+			{{$index + 1}} - {{tracking.title}}
 			<span class="icon-angle-right pull-right">></span>
 		</button>
 	</div>

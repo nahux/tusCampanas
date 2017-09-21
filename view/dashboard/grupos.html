@@ -1,14 +1,11 @@
 <div class="bloqueIzquierda input-group" ng-controller="GruposController">
 	<h1>Tus Grupos</h1>
 	<div class="input-group">  
-		<input type="text" class="form-control" placeholder="Grupos...">  
-		<span class="input-group-btn">  
-			<button class="btn btn-default" type="button">Buscar!</button>  
-		</span>   
+		<input type="text" ng-model="filtro" class="form-control" placeholder="Buscar Grupos...">  
 	</div><br>
 	<div class="list-group">
-		<button type="button" ng-repeat="grupo in grupos" class="list-group-item" ui-sref="dashboard.grupos.detalle({ id: grupo.id })"> 
-			{{grupo.title}} 
+		<button type="button" ng-repeat="grupo in grupos | filter: filtro" class="list-group-item" ui-sref="dashboard.grupos.detalle({ id: grupo.id })"> 
+			{{$index + 1}} - {{grupo.title}} 
 			<span class="icon-angle-right pull-right">></span>
 		</button>
 	</div>

@@ -7,25 +7,30 @@ angular
 				id: 1,
 				title: "México 3 días", 
 				desc: "Vacaciones en México 3 días",
-				grupos: {
-					"2":"Adultos"
-				}
+				grupos: [{
+					id:2
+				}]
 			},
 			{
 				id: 2,
 				title: "Europa 21 días", 
 				desc: "Vacaciones en Alemania, Francia e Italia en 21 días",
-				grupos: {
-					"1":"Adultos La Plata"
-				}
+				grupos: [
+					{
+						id:1
+					},
+					{
+						id:2
+					}
+				]
 			},
 			{
 				id: 3,
 				title: "Camboya 5 días", 
 				desc: "Vacaciones en Camboya en 5 días",
-				grupos: {
-					"1":"Adultos La Plata"
-				}
+				grupos: [{
+					id:1
+				}]
 			}];
 
 		this.getCampanas = function() {
@@ -38,6 +43,7 @@ angular
 			return deferred.promise; 
 		}
 
+		//Detalle
 		this.getCampana = function(idCamp) {
 			var deferred = $q.defer();
 			
@@ -48,7 +54,7 @@ angular
 		}
 
 		//Para nueva campaña
-		var campanaNueva = {};
+		var campanaNueva = {grupos:[]};
 		this.addTitleDesc = function (campana) {
 			campanaNueva.title = campana.title;
 			campanaNueva.desc = campana.desc;
@@ -72,12 +78,15 @@ angular
 			
 			$timeout(function() {
 				deferred.resolve(campanas.push(campana));
+				campanaNueva = {};
 			}, 500);
 			return deferred.promise;  
 		}
 
 		this.setId = function() {
-			campanaNueva.id = Math, campanas.map(function(o){ return o.id });
+			//Nicht richtig
+			campanaNueva.id = campanas[campanas.length - 1].id + 1;
+
 		}
 
 }]);
@@ -95,6 +104,12 @@ angular
 		}
 		
 		$scope.refreshCampanas();	
+
+		//Usado para nueva campaña
+		$scope.setId = function (){
+			CampanasService.setId();
+		}
+
 }]);
 
 //Componente campañas
@@ -117,14 +132,20 @@ angular
 //Controller campaña
 angular
 	.module('inicio')
-	.controller("DetalleCampController", ["$scope", "CampanasService", "$state", "$stateParams", function($scope, CampanasService, $state, $stateParams) {
+	.controller("DetalleCampController", ["$scope", "CampanasService", "GruposService", "$state", "$stateParams", 
+																				function($scope, CampanasService, GruposService, $state, $stateParams) {
 		// model
 		$scope.refreshCampana = function() {
 			CampanasService.getCampana($stateParams.id).then(function(campana) {
 				$scope.campana = campana;
-			});  
+				$scope.getGruposCampana(campana);
+			});
+		}
+		$scope.getGruposCampana = function(campana) {
+			$scope.gruposCamp = GruposService.getGruposCampana(campana);
 		}
 		$scope.refreshCampana();
+
 }]);
 
 
@@ -158,11 +179,7 @@ angular
 	.controller("NuevaCampController", ["$scope", "CampanasService", "GruposService", "$state", "$stateParams",
 										function($scope, CampanasService, GruposService, $state, $stateParams) {
 
-		$scope.campana = {};
-
-		$scope.setId = function (){
-			CampanasService.setId();
-		}
+		$scope.campana = {grupos:[]};
 
 		$scope.addTitleDesc = function (campana) {
 			CampanasService.addTitleDesc(campana);
@@ -184,6 +201,10 @@ angular
 		}
 		$scope.refreshGrupos();
 		
+		$scope.addGrupos = function(grupos) {
+			CampanasService.addGrupos(grupos);
+			$scope.refreshNuevaCampana();
+		}
 
 		$scope.addCampana = function(campana) {
 			CampanasService.addCampana(campana).then(function() {
