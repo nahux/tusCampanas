@@ -12,7 +12,7 @@
 		<p>{{grupo.desc}} </p>
 		<h4>Clientes</h4>
 		<ul>
-			<li ng-repeat="cliente in grupo.clientes">{{cliente}}</li>
+			<li ng-repeat="cliente in grupo.clientes">{{cliente.nombre}} {{cliente.apellido}} {{cliente}}</li>
 		</ul>
 		<br>
 		<button class="btn btn-default">Editar</button>

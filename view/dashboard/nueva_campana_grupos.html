@@ -10,23 +10,23 @@
 		<h3>{{campana.title}}</h3>
 		<h4>Seleccione los destinatarios</h4>
 		<div class="input-group">  
-			<input type="text" class="form-control" placeholder="Grupos...">  
+			<input type="text" class="form-control" ng-model="filtro" placeholder="Grupos...">  
 			<span class="input-group-btn">  
 				<button class="btn btn-default" type="button">Buscar!</button>  
 			</span>
-	</div><br>  
+		</div><br>  
 		
 		<label>Grupos</label>
 		<form name="form-camp" id="form-campId">
 			<div id="lista" class="list-group">
-				<span ng-repeat="grupo in grupos">
+				<span ng-repeat="grupo in grupos | filter : filtro">
 					<input type="checkbox" name="gruposList" id="{{grupo.id}}" ng-model="campana.grupos[$index].id"
 					 ng-true-value="'{{grupo.id}}'" ng-false-value="''" id="'{{grupo.id}}'"> {{grupo.title}}<br>
 				</span><br>
 			</div>
 
 			<a class="btn btn-default" ui-sref="dashboard.campanas.nueva"> <- Atras</a>
-			<button type="submit" ui-sref="dashboard.campanas.nueva3" ng-click="addGrupos(campana.grupos)" ng-disabled="!campana.grupos" onclick="validarCheck()" class="btn btn-default">Siguiente -></a>
+			<a type="submit" ui-sref="dashboard.campanas.nueva3" ng-click="addGrupos(campana.grupos)" ng-disabled="!campana.grupos" onclick="validarCheck()" class="btn btn-default">Siguiente -></a>
 		</form>
 	</div>
 

@@ -69,6 +69,12 @@ angular
 				component: 'grupoDetalle'
 			});
 
+		$stateProvider
+			.state('dashboard.grupos.nuevo', {
+				url: '/nuevo',		
+				component: 'nuevoGrupo',
+			});
+
 		//Estados tracking
 		$stateProvider
 			.state('dashboard.tracking', {

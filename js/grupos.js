@@ -2,7 +2,10 @@
 angular
 	.module('inicio')
 	.service("GruposService", ["$q", "$timeout", function($q, $timeout) {
-		var clientes = [{"juan": {nombre: "Juan", apellido: "Pérez"}, "marcos": {nombre: "Marcos", apellido: "Pérez"}} ]
+		var clientes = [
+						{id: 1, nombre: "Juan", apellido: "Pérez"}, 
+						{id: 2, nombre: "Marcos", apellido: "López"},
+						{id: 3, nombre: "Darío", apellido: "Rossi"} ]
 		var grupos = 
 					[{	id: 1,
 						title: "Adultos", 
@@ -50,20 +53,39 @@ angular
 			return gruposCamp;
 		}
 
+		this.getClientes = function() {
+			var deferred = $q.defer();
+			
+			$timeout(function() {
+				deferred.resolve(clientes);
+			}, 1000); 
+			return deferred.promise; 
+		}	
+
+		this.addGrupo = function(grupo) {
+			var deferred = $q.defer();
+			
+			grupo.id = grupos[grupos.length - 1].id + 1;
+			$timeout(function() {
+				deferred.resolve(grupos.push(grupo));
+			}, 500);
+			return deferred.promise;  
+		}
+
 	}]);
 
-	//Controller grupos
-	angular
-		.module('inicio')
-		.controller("GruposController", ["$scope", "GruposService", function($scope, GruposService) {
-			// model
-			$scope.refreshGrupos = function() {
-				GruposService.getGrupos().then(function(grupos) {
-					$scope.grupos = grupos;
-				});  
-			}
-			
-			$scope.refreshGrupos();	
+//Controller grupos
+angular
+	.module('inicio')
+	.controller("GruposController", ["$scope", "GruposService", function($scope, GruposService) {
+		// model
+		$scope.refreshGrupos = function() {
+			GruposService.getGrupos().then(function(grupos) {
+				$scope.grupos = grupos;
+			});  
+		}
+		
+		$scope.refreshGrupos();	
 }]);
 
 //Componente grupos
@@ -92,4 +114,33 @@ angular
 			});
 		}
 		$scope.refreshGrupo();
+}]);
+
+
+////////////////////////////////////////////
+
+//DETALLE
+//Componente nuevogrupo
+angular
+	.module('inicio')
+	.component('nuevoGrupo', {
+		templateUrl: 'dashboard/nuevo_grupo.html'
+});
+
+angular
+	.module('inicio')
+	.controller("NuevoGrupoController", ["$scope", "GruposService", "$state", "$stateParams", function($scope, GruposService,$state,$stateParams) {
+		$scope.grupo = {clientes:[]};
+		$scope.refreshClientes = function() {
+			GruposService.getClientes().then(function(clientes) {
+				$scope.clientes = clientes;
+			});
+		}
+		$scope.refreshClientes();
+
+		$scope.createGrupo = function(grupo) {
+			GruposService.addGrupo(grupo).then(function() {
+
+			})
+		}
 }]);

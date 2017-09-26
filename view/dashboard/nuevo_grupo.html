@@ -1,0 +1,39 @@
+<div class="bloqueDerecha panel panel-default" ng-controller="NuevoGrupoController">
+	
+	<div class="panel-heading">
+		Nuevo Grupo
+		<span style="" class="icon-angle-right pull-right">
+			<a ui-sref="dashboard.grupos"  style="color:black; text-decoration:none;">X</a>
+		</span>
+	</div>
+	<div class="panel-body">
+		<div class="input-group">
+			<!-- Debería recibir un grupo vacío -->
+			<form name="form-camp" novalidate>
+			 <label>Título</label>
+			 <input type="text" name="titulo" ng-model="grupo.title" placeholder="Ingrese un título" class="form-control" ng-value="grupo.title" required><br><br><br>
+			 <label>Descripción</label>
+			 <input type="text" name="desc" ng-model="grupo.desc" placeholder="Ingrese una descripción" class="form-control" required><br><br><br><br>
+			</form>
+		</div>
+
+		<label>Clientes</label>
+		<form name="form-camp" id="form-campId">
+			<div class="input-group">  
+					<input type="text" class="form-control" ng-model="filtro" placeholder="Clientes...">  
+					<span class="input-group-btn">  
+						<button class="btn btn-default" type="button">Buscar!</button>  
+					</span>
+			</div><br> 
+			<div id="lista" class="list-group">
+				<span ng-repeat="cliente in clientes | filter : filtro">
+					<input type="checkbox" name="clientesList" id="{{cliente.id}}" ng-model="grupo.clientes[$index]"
+					 ng-true-value="'{{cliente}}'" ng-false-value="''" id="'{{cliente.id}}'"> {{cliente.nombre}} {{cliente.apellido}}<br>
+				</span><br>
+			</div>
+
+			<a class="btn btn-default" ui-sref="dashboard.grupos"> <- Atras</a>
+			<a type="submit" ui-sref="dashboard.grupos" ng-click="createGrupo(grupo)" ng-disabled="!grupo.clientes" onclick="validarCheck()" class="btn btn-default">Siguiente -></a>
+		</form>
+	</div>
+</div>
