@@ -10,19 +10,18 @@ angular
 					[{	id: 1,
 						title: "Adultos", 
 						desc: "Adultos, de 18 a 80 años", 
-						clientes: {
-									"cliente1":"Juan",
-									"cliente2":"Marcos",
-						}
+						clientes: [
+									{id:2},
+									{id:3}
+						]
 					 },
 					 {
 						id: 2,
 						title: "Adultos La Plata", 
 						desc: "Adultos de La Plata, de 18 a 80 años", 
-						clientes: {
-									"cliente1":"Lorena",
-									"cliente2":"Mariano",
-						}
+						clientes: [
+									{id:1}
+						]
 					}];
 		
 		this.getGrupos = function() {
@@ -42,6 +41,15 @@ angular
 				deferred.resolve(grupos.find(x => x.id == idGrupo));
 			}, 500);
 			return deferred.promise;  
+		}
+
+		this.getClientesGrupo = function(grupo) {
+			var clientesGrupo = [];
+			for (var i = 0; i < grupo.clientes.length; i++) {
+				var idCliente = grupo.clientes[i].id;
+				clientesGrupo[i] = clientes.find(x => x.id == idCliente);
+			};
+			return clientesGrupo;
 		}
 
 		this.getGruposCampana = function(campana) {
@@ -107,11 +115,14 @@ angular
 angular
 	.module('inicio')
 	.controller("DetalleGrupoController", ["$scope", "GruposService", "$state", "$stateParams", function($scope, GruposService,$state,$stateParams) {
-		// model
 		$scope.refreshGrupo = function() {
 			GruposService.getGrupo($stateParams.id).then(function(grupo) {
 				$scope.grupo = grupo;
+				$scope.getClientesGrupo(grupo);
 			});
+		}
+		$scope.getClientesGrupo = function(grupo) {
+			$scope.clientes = GruposService.getClientesGrupo(grupo);
 		}
 		$scope.refreshGrupo();
 }]);
@@ -119,7 +130,7 @@ angular
 
 ////////////////////////////////////////////
 
-//DETALLE
+//NUEVO
 //Componente nuevogrupo
 angular
 	.module('inicio')

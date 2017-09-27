@@ -10,9 +10,14 @@
 		<p>{{grupo.title}}</p>
 		<h4>Descripción</h4>
 		<p>{{grupo.desc}} </p>
-		<h4>Clientes</h4>
-		<ul>
-			<li ng-repeat="cliente in grupo.clientes">{{cliente.nombre}} {{cliente.apellido}} {{cliente}}</li>
+		<h4>
+			<a href="" style="color:#33334c;" ng-click="showClientes=!showClientes">
+				<img src="" alt="Clientes">
+			</a>	
+		</h4>
+		
+		<ul ng-show="showClientes">
+			<li ng-repeat="cliente in clientes">{{cliente.nombre}} {{cliente.apellido}}</li>
 		</ul>
 		<br>
 		<button class="btn btn-default">Editar</button>

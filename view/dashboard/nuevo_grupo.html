@@ -21,19 +21,16 @@
 		<form name="form-camp" id="form-campId">
 			<div class="input-group">  
 					<input type="text" class="form-control" ng-model="filtro" placeholder="Clientes...">  
-					<span class="input-group-btn">  
-						<button class="btn btn-default" type="button">Buscar!</button>  
-					</span>
 			</div><br> 
 			<div id="lista" class="list-group">
 				<span ng-repeat="cliente in clientes | filter : filtro">
-					<input type="checkbox" name="clientesList" id="{{cliente.id}}" ng-model="grupo.clientes[$index]"
-					 ng-true-value="'{{cliente}}'" ng-false-value="''" id="'{{cliente.id}}'"> {{cliente.nombre}} {{cliente.apellido}}<br>
+					<input type="checkbox" name="clientesList" id="{{cliente.id}}" ng-model="grupo.clientes[$index].id"
+					 ng-true-value="'{{cliente.id}}'" ng-false-value="''" id="'{{cliente.id}}'"> {{cliente.nombre}} {{cliente.apellido}}<br>
 				</span><br>
 			</div>
 
 			<a class="btn btn-default" ui-sref="dashboard.grupos"> <- Atras</a>
-			<a type="submit" ui-sref="dashboard.grupos" ng-click="createGrupo(grupo)" ng-disabled="!grupo.clientes" onclick="validarCheck()" class="btn btn-default">Siguiente -></a>
+			<a type="submit" ui-sref="dashboard.grupos" ng-click="createGrupo(grupo)" ng-disabled="!grupo.clientes" onclick="" class="btn btn-default">Siguiente -></a>
 		</form>
 	</div>
 </div>
