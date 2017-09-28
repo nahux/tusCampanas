@@ -176,8 +176,8 @@ angular
 //Controller
 angular
 	.module('inicio')
-	.controller("NuevaCampController", ["$scope", "CampanasService", "GruposService", "$state", "$stateParams",
-										function($scope, CampanasService, GruposService, $state, $stateParams) {
+	.controller("NuevaCampController", ["$scope", "CampanasService", "GruposService", "TrackingService", "$state", "$stateParams",
+										function($scope, CampanasService, GruposService, TrackingService, $state, $stateParams) {
 
 		$scope.campana = {grupos:[]};
 
@@ -208,6 +208,9 @@ angular
 
 		$scope.addCampana = function(campana) {
 			CampanasService.addCampana(campana).then(function() {
+			});
+			TrackingService.addTracking(campana).then(function() {
+
 			});
 		}
 

@@ -45,19 +45,31 @@ angular
 
 		this.getClientesGrupo = function(grupo) {
 			var clientesGrupo = [];
-			for (var i = 0; i < grupo.clientes.length; i++) {
+			var i = 0;
+			Array.from(grupo.clientes).forEach(function (cliente) {
+		  		var idCliente = cliente.id;
+				clientesGrupo[i] = clientes.find(x => x.id == idCliente);
+				i++;
+			})
+			/*for (var i = 0; i < grupo.clientes.length; i++) {
 				var idCliente = grupo.clientes[i].id;
 				clientesGrupo[i] = clientes.find(x => x.id == idCliente);
-			};
+			};*/
 			return clientesGrupo;
 		}
 
 		this.getGruposCampana = function(campana) {
 			var gruposCamp = [];
-			for (var i = 0; i < campana.grupos.length; i++) {
+			var i = 0;
+			campana.grupos.forEach(function (grupo) {
+		  		var idGrupo = grupo.id;
+				gruposCamp[i] = grupos.find(x => x.id == idGrupo);
+				i++;
+			})
+			/*for (var i = 0; i < campana.grupos.length; i++) {
 				var idGrupo = campana.grupos[i].id;
-				gruposCamp[i] = grupos.find(x => x.id == idGrupo).title
-			};
+				gruposCamp[i] = grupos.find(x => x.id == idGrupo)
+			};*/
 			return gruposCamp;
 		}
 

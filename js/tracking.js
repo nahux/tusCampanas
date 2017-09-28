@@ -41,6 +41,23 @@ angular
 			return deferred.promise;  
 		}
 
+		this.addTracking = function(campana) {
+			var deferred = $q.defer();
+
+			$timeout(function() {
+				var tracking = {};
+				//Nich Richtig
+				tracking.id = trackings[trackings.length - 1].id + 1;
+				tracking.id_campana = campana.id;
+				tracking.title = campana.title;
+				tracking.sent = 0;
+				tracking.opened = 0;
+				tracking.errors = 0;
+				deferred.resolve(trackings.push(tracking));
+			}, 1000);
+			return deferred.promise;
+		}
+
 }]);
 
 //Component
