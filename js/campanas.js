@@ -96,7 +96,6 @@ angular
 			else{
 				return false;
 			}
-			
 		}
 
 }]);

@@ -89,6 +89,16 @@ angular
 			return deferred.promise;  
 		}
 
+		this.deleteGrupo = function(grupo) {
+			if(grupos.find(x => x.id == grupo.id)){
+				grupos.splice(grupos.indexOf(grupo), 1); 
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+
 	}]);
 
 //Controller grupos
@@ -134,6 +144,17 @@ angular
 			$scope.clientes = GruposService.getClientesGrupo(grupo);
 		}
 		$scope.refreshGrupo();
+
+		$scope.deleteGrupo = function(grupo) {
+			if (confirm('¿Está seguro que desea borrar el grupo?')) {
+				if (GruposService.deleteGrupo(grupo)) {
+					alert('Grupo borrado correctamente');
+				} else{
+					alert('Hubo un error al borrar el grupo')
+				}
+				$state.go('dashboard.grupos',{});
+			}
+		}
 }]);
 
 
