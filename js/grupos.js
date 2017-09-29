@@ -53,11 +53,7 @@ angular
 		  		}
 				
 				i++;
-			})
-			/*for (var i = 0; i < grupo.clientes.length; i++) {
-				var idCliente = grupo.clientes[i].id;
-				clientesGrupo[i] = clientes.find(x => x.id == idCliente);
-			};*/
+			});
 			return clientesGrupo;
 		}
 
@@ -70,11 +66,7 @@ angular
 					gruposCamp[i] = grupos.find(x => x.id == idGrupo);
 				}
 				i++;
-			})
-			/*for (var i = 0; i < campana.grupos.length; i++) {
-				var idGrupo = campana.grupos[i].id;
-				gruposCamp[i] = grupos.find(x => x.id == idGrupo)
-			};*/
+			});
 			return gruposCamp;
 		}
 
