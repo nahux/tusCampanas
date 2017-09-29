@@ -202,7 +202,8 @@ angular
 		$scope.refreshGrupos();
 		
 		$scope.addGrupos = function(grupos) {
-			CampanasService.addGrupos(grupos);
+			var gruposArray = Object.values(grupos);
+			CampanasService.addGrupos(gruposArray);
 			$scope.refreshNuevaCampana();
 		}
 

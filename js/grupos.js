@@ -48,7 +48,10 @@ angular
 			var i = 0;
 			Array.from(grupo.clientes).forEach(function (cliente) {
 		  		var idCliente = cliente.id;
-				clientesGrupo[i] = clientes.find(x => x.id == idCliente);
+		  		if (idCliente) {
+	  				clientesGrupo[i] = clientes.find(x => x.id == idCliente);
+		  		}
+				
 				i++;
 			})
 			/*for (var i = 0; i < grupo.clientes.length; i++) {
@@ -63,7 +66,9 @@ angular
 			var i = 0;
 			campana.grupos.forEach(function (grupo) {
 		  		var idGrupo = grupo.id;
-				gruposCamp[i] = grupos.find(x => x.id == idGrupo);
+		  		if (idGrupo) {
+					gruposCamp[i] = grupos.find(x => x.id == idGrupo);
+				}
 				i++;
 			})
 			/*for (var i = 0; i < campana.grupos.length; i++) {
@@ -162,6 +167,7 @@ angular
 		$scope.refreshClientes();
 
 		$scope.createGrupo = function(grupo) {
+			grupo.clientes = Object.values(grupo.clientes);
 			GruposService.addGrupo(grupo).then(function() {
 
 			})
