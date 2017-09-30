@@ -1,44 +1,22 @@
 //Servicio campañas
 angular
 	.module('inicio')
-	.service("CampanasService", ["$q", "$timeout", function($q, $timeout) {
-		var campanas = 
-			[{
-				id: 1,
-				title: "México 3 días", 
-				desc: "Vacaciones en México 3 días",
-				grupos: [{
-					id:2
-				}]
-			},
-			{
-				id: 2,
-				title: "Europa 21 días", 
-				desc: "Vacaciones en Alemania, Francia e Italia en 21 días",
-				grupos: [
-					{
-						id:1
-					},
-					{
-						id:2
-					}
-				]
-			},
-			{
-				id: 3,
-				title: "Camboya 5 días", 
-				desc: "Vacaciones en Camboya en 5 días",
-				grupos: [{
-					id:1
-				}]
-			}];
+	.service("CampanasService", ["$q", "$timeout","$http", function($q, $timeout, $http) {
+		var campanas = [];
 
 		this.getCampanas = function() {
 			var deferred = $q.defer();
 			
-			$timeout(function() {
-				deferred.resolve(campanas);
-			}, 1000); 
+			$http.get('/api/campanas')
+				.then(function(result) {
+					// save fetched posts to the local variable
+					var campanasTraidas = result.data;
+					// resolve the deferred
+					deferred.resolve(campanasTraidas);
+				}, function(error) {
+					var campanasTraidas = error;
+					deferred.reject(error);
+				});
 			
 			return deferred.promise; 
 		}
@@ -104,12 +82,12 @@ angular
 //Controller campañas
 angular
 	.module('inicio')
-	.controller("CampanasController", ["$scope", "CampanasService", function($scope, CampanasService) {
+	.controller("CampanasController", ["$scope", "CampanasService", "$http", function($scope, CampanasService, $http) {
 		// model
 		$scope.refreshCampanas = function() {
 			CampanasService.getCampanas().then(function(campanas) {
 				$scope.campanas = campanas;
-			});  
+			});
 		}
 		
 		$scope.refreshCampanas();	
