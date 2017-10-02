@@ -13,7 +13,6 @@ app.use(cookieParser())
 
 app.use('/api/campanas', campanas);
 
-//app.use(express.static('../'));
 app.use(express.static('../frontend'));
 
 module.exports = app;

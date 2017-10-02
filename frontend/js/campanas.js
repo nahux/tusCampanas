@@ -25,9 +25,14 @@ angular
 		this.getCampana = function(idCamp) {
 			var deferred = $q.defer();
 			
-			$timeout(function() {
-				deferred.resolve(campanas.find(x => x.id == idCamp));
-			}, 500);
+			$http.get('/api/campanas/' + idCamp)
+				.then(function(result) {
+					var campanaTraida = result.data;
+					deferred.resolve(campanaTraida);
+				}, function(error) {
+					var campanaTraida = error;
+					deferred.reject(error);
+				});
 			return deferred.promise;  
 		}
 
@@ -51,19 +56,22 @@ angular
 			return deferred.promise;  
 		}
 
-		this.addCampana = function(campana) {
+		this.addCampana = function(campanaNew) {
 			var deferred = $q.defer();
 			
-			$timeout(function() {
-				deferred.resolve(campanas.push(campana));
-				campanaNueva = {};
-			}, 500);
+			$http.post('/api/campanas/',campanaNew)
+				.then(function(result) {
+					deferred.resolve(result.data);
+				}, function(error) {
+					deferred.reject(error);
+
+				});
 			return deferred.promise;  
 		}
 
 		this.setId = function() {
 			//Nicht richtig
-			campanaNueva.id = campanas[campanas.length - 1].id + 1;
+			//campanaNueva.id = campanas[campanas.length - 1].id + 1;
 		}
 
 		this.deleteCampana = function(campana) {
@@ -206,11 +214,14 @@ angular
 		}
 
 		$scope.addCampana = function(campana) {
+			var nuevaCampana;
 			CampanasService.addCampana(campana).then(function() {
+				nuevaCampana = campana;
 			});
 			TrackingService.addTracking(campana).then(function() {
 
 			});
+			$state.go('dashboard.campanas.detalle({ id: '+nuevaCampana.id+' })',{});
 		}
 
 }]);
