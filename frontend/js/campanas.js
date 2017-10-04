@@ -221,7 +221,50 @@ angular
 			TrackingService.addTracking(campana).then(function() {
 
 			});
-			$state.go('dashboard.campanas.detalle({ id: '+nuevaCampana.id+' })',{});
+			$state.go('dashboard.campanas',{});
 		}
+
+}]);
+
+
+////////////////////////////////////////////////////////////////////
+
+//MODIFICAR CAMPAÑA
+
+//Componente campaña
+angular
+	.module('inicio')
+	.component('campanaModificar', {
+		templateUrl: 'dashboard/modificar_campana.html'
+});
+
+//Controller campaña
+angular
+	.module('inicio')
+	.controller("ModCampController", ["$scope", "CampanasService", "GruposService", "$state", "$stateParams", 
+																				function($scope, CampanasService, GruposService, $state, $stateParams) {
+		// model
+		$scope.refreshCampana = function() {
+			CampanasService.getCampana($stateParams.id).then(function(campana) {
+				$scope.campana = campana;
+				$scope.getGruposCampana(campana);
+			});
+		}
+		$scope.getGruposCampana = function(campana) {
+			$scope.gruposCamp = GruposService.getGruposCampana(campana);
+		}
+		$scope.refreshCampana();
+
+		/*
+		$scope.deleteCampana = function(campana) {
+			if (confirm('¿Está seguro que desea borrar la campaña?')) {
+				if (CampanasService.deleteCampana(campana)) {
+					alert('Campaña borrada correctamente');
+				} else{
+					alert('Hubo un error al borrar la campaña')
+				}
+				$state.go('dashboard.campanas',{});
+			}
+		}*/
 
 }]);

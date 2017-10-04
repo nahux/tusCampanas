@@ -8,7 +8,7 @@ var campanas = [
 									title:"Crucero 10 días Brasil",
 									desc:"Viaje en crucero de Buenos Aires a Rio de Janeiro", 
 									grupos: 
-										[{id:1}, {id:3}]
+										[{id:1}, {id:2}]
 								}];
 var campanasById = [{},
 										{
@@ -16,7 +16,7 @@ var campanasById = [{},
 											title:"Crucero 10 días Brasil",
 											desc:"Viaje en crucero de Buenos Aires a Rio de Janeiro", 
 											grupos: 
-												[{id:1}, {id:3}]
+												[{id:1}, {id:2}]
 										}];
 
 router.put('/:id', function(req, res, next) {
@@ -25,7 +25,7 @@ router.put('/:id', function(req, res, next) {
 	var id = req.params["id"];    
 	var campana = campanasById[id];
 	if (campana) {
-			campana.title = updatedCampana.title;
+			campana = updatedCampana;
 			res.json(campana);
 	} else {
 			res.status(404).send("not found");
@@ -38,7 +38,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-	console.log(campanasById[0]);
 	var id = req.params["id"];    
 	var campana = campanasById[id];
 	if (campana) {

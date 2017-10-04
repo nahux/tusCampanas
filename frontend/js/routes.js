@@ -56,6 +56,12 @@ angular
 				component: 'nuevaCampana3',
 			});
 
+		$stateProvider
+			.state('dashboard.campanas.modificar', {
+				url: '/:id', 
+				component: 'campanaModificar'
+			});
+
 		//Estados Grupos
 		$stateProvider
 			.state('dashboard.grupos', {
