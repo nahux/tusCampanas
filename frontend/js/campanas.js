@@ -75,13 +75,17 @@ angular
 		}
 
 		this.deleteCampana = function(campana) {
-			if(campanas.find(x => x.id == campana.id)){
-				campanas.splice(campanas.indexOf(campana), 1); 
-				return true;
-			}
-			else{
-				return false;
-			}
+			var deferred = $q.defer();
+			
+			$http.delete('/api/campanas/' + campana.id)
+				.then(function(result) {
+					var campanaEliminada = result.data;
+					deferred.resolve(campanaEliminada);
+				}, function(error) {
+					var campanaTraida = error;
+					deferred.reject(error);
+				});
+			return deferred.promise;  
 		}
 
 }]);
@@ -144,11 +148,11 @@ angular
 		$scope.deleteCampana = function(campana) {
 			if (confirm('¿Está seguro que desea borrar la campaña?')) {
 				if (CampanasService.deleteCampana(campana)) {
-					alert('Campaña borrada correctamente');
+					alert('Campaña "'+campana.title+'" borrada correctamente');
 				} else{
 					alert('Hubo un error al borrar la campaña')
 				}
-				$state.go('dashboard.campanas',{});
+				$state.go('dashboard.campanas',{}, {reload:true});
 			}
 		}
 
