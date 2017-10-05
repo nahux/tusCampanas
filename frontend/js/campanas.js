@@ -69,9 +69,18 @@ angular
 			return deferred.promise;  
 		}
 
-		this.setId = function() {
-			//Nicht richtig
-			//campanaNueva.id = campanas[campanas.length - 1].id + 1;
+		this.modificarCampana = function(campana) {
+			var deferred = $q.defer();
+			
+			$http.put('/api/campanas/' + campana.id, campana)
+				.then(function(result) {
+					var campanaModificada = result.data;
+					deferred.resolve(campanaModificada);
+				}, function(error) {
+					var campanaTraida = error;
+					deferred.reject(error);
+				});
+			return deferred.promise;  
 		}
 
 		this.deleteCampana = function(campana) {
@@ -103,12 +112,6 @@ angular
 		}
 		
 		$scope.refreshCampanas();	
-
-		//Usado para nueva campaña
-		$scope.setId = function (){
-			CampanasService.setId();
-		}
-
 }]);
 
 //Componente campañas
@@ -225,7 +228,7 @@ angular
 			TrackingService.addTracking(campana).then(function() {
 
 			});
-			$state.go('dashboard.campanas',{});
+			$state.go('dashboard.campanas',{},{reload:true});
 		}
 
 }]);
@@ -259,16 +262,12 @@ angular
 		}
 		$scope.refreshCampana();
 
-		/*
-		$scope.deleteCampana = function(campana) {
-			if (confirm('¿Está seguro que desea borrar la campaña?')) {
-				if (CampanasService.deleteCampana(campana)) {
-					alert('Campaña borrada correctamente');
-				} else{
-					alert('Hubo un error al borrar la campaña')
-				}
-				$state.go('dashboard.campanas',{});
-			}
-		}*/
+
+		$scope.modificarCampana = function(campana) {
+			CampanasService.modificarCampana(campana).then(function(campana){
+
+			});
+			$state.go('dashboard.campanas',{},{reload:true});
+		}
 
 }]);

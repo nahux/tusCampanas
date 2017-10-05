@@ -4,15 +4,15 @@ var uuid = require('uuid/v4');
 
 var campanas = [
 								{
-									id:1,
+									id:0,
 									title:"Crucero 10 días Brasil",
 									desc:"Viaje en crucero de Buenos Aires a Rio de Janeiro", 
 									grupos: 
 										[{id:1}, {id:2}]
 								}];
-var campanasById = [{},
+var campanasById = [
 										{
-											id:1,
+											id:0,
 											title:"Crucero 10 días Brasil",
 											desc:"Viaje en crucero de Buenos Aires a Rio de Janeiro", 
 											grupos: 
@@ -23,10 +23,12 @@ router.put('/:id', function(req, res, next) {
 	var updatedCampana = req.body;
 	
 	var id = req.params["id"];    
-	var campana = campanasById[id];
+	var campana = campanas.find(x => x.id == id);
 	if (campana) {
-			campana = updatedCampana;
-			res.json(campana);
+		var index = campanas.indexOf(campana); 
+		campanas[index] = updatedCampana;
+		campanasById[campana.id] = updatedCampana;
+		res.json(campana);
 	} else {
 			res.status(404).send("not found");
 	}
