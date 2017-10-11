@@ -1,3 +1,3 @@
 //App
 angular
-	.module('inicio', ['ui.router']);
+	.module('inicio', ['ui.router', 'ngResource']);

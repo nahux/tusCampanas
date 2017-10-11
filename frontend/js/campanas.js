@@ -1,12 +1,21 @@
+//Factory para RESOURCE
+angular.module('inicio').factory('Entry', function($resource) {
+  return $resource('/api/campanas/:id');
+});
+
 //Servicio campañas
 angular
 	.module('inicio')
-	.service("CampanasService", ["$q", "$timeout","$http", function($q, $timeout, $http) {
+	.service("CampanasService", ["$q", "$timeout","$http", "Entry", function($q, $timeout, $http, Entry) {
 		var campanas = [];
 
 		this.getCampanas = function() {
 			var deferred = $q.defer();
 			
+			var campanasTraidas = Entry.query(function() {
+				deferred.resolve(campanasTraidas);
+			})
+			/*
 			$http.get('/api/campanas')
 				.then(function(result) {
 					// save fetched posts to the local variable
@@ -16,9 +25,9 @@ angular
 				}, function(error) {
 					var campanasTraidas = error;
 					deferred.reject(error);
-				});
+				});*/
 			
-			return deferred.promise; 
+			return deferred.promise;
 		}
 
 		//Detalle
