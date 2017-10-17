@@ -1,6 +1,11 @@
 //Factory para RESOURCE
 angular.module('inicio').factory('Entry', function($resource) {
-  return $resource('/api/campanas/:id');
+  return $resource('/api/campanas/:id',{'id' : '@id'}, {
+  		'query': { method: 'GET', isArray: true},
+      'update': { method: 'PUT' },
+      'save': { method: 'POST' },
+      'remove': { method:'DELETE' }
+    });
 });
 
 //Servicio campañas
@@ -15,17 +20,6 @@ angular
 			var campanasTraidas = Entry.query(function() {
 				deferred.resolve(campanasTraidas);
 			})
-			/*
-			$http.get('/api/campanas')
-				.then(function(result) {
-					// save fetched posts to the local variable
-					var campanasTraidas = result.data;
-					// resolve the deferred
-					deferred.resolve(campanasTraidas);
-				}, function(error) {
-					var campanasTraidas = error;
-					deferred.reject(error);
-				});*/
 			
 			return deferred.promise;
 		}
@@ -33,15 +27,11 @@ angular
 		//Detalle
 		this.getCampana = function(idCamp) {
 			var deferred = $q.defer();
+
+			var campanaTraida = Entry.get({id:idCamp},function(){
+				deferred.resolve(campanaTraida);
+			})
 			
-			$http.get('/api/campanas/' + idCamp)
-				.then(function(result) {
-					var campanaTraida = result.data;
-					deferred.resolve(campanaTraida);
-				}, function(error) {
-					var campanaTraida = error;
-					deferred.reject(error);
-				});
 			return deferred.promise;  
 		}
 
@@ -68,41 +58,30 @@ angular
 		this.addCampana = function(campanaNew) {
 			var deferred = $q.defer();
 			
-			$http.post('/api/campanas/',campanaNew)
-				.then(function(result) {
-					deferred.resolve(result.data);
-				}, function(error) {
-					deferred.reject(error);
+			var campanaCreada = Entry.save(campanaNew,function(){
+				deferred.resolve(campanaCreada);
+			})
 
-				});
 			return deferred.promise;  
 		}
 
 		this.modificarCampana = function(campana) {
 			var deferred = $q.defer();
 			
-			$http.put('/api/campanas/' + campana.id, campana)
-				.then(function(result) {
-					var campanaModificada = result.data;
-					deferred.resolve(campanaModificada);
-				}, function(error) {
-					var campanaTraida = error;
-					deferred.reject(error);
-				});
+			var campanaModificada = Entry.update(campana,function(){
+				deferred.resolve(campanaModificada);
+			})
+
 			return deferred.promise;  
 		}
 
 		this.deleteCampana = function(campana) {
 			var deferred = $q.defer();
 			
-			$http.delete('/api/campanas/' + campana.id)
-				.then(function(result) {
-					var campanaEliminada = result.data;
-					deferred.resolve(campanaEliminada);
-				}, function(error) {
-					var campanaTraida = error;
-					deferred.reject(error);
-				});
+			var campanaBorrada = Entry.remove({id:campana.id},function(){
+				deferred.resolve(campanaBorrada);
+			})			
+
 			return deferred.promise;  
 		}
 
