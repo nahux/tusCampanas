@@ -1,60 +1,53 @@
+//Factory para RESOURCE
+angular.module('inicio').factory('EntryTrackings', function($resource) {
+	return $resource('/api/trackings/:id',{'id' : '@id'}, {
+			'query': { method: 'GET', isArray: true},
+			'update': { method: 'PUT' },
+			'save': { method: 'POST' },
+			'remove': { method:'DELETE' }
+		});
+});
+
 //Service
 angular
 	.module('inicio')
-	.service("TrackingService", ["$q", "$timeout", "CampanasService", function($q, $timeout, CampanasService) {
-		var trackings = 
-			[{
-				id: 1,
-				id_campana: 2,
-				title: "Europa 21 días",
-				sent: 35,
-				opened: 5,
-				errors: 2
-
-			},
-			{
-				id: 2,
-				id_campana: 3,
-				title: "Camboya 5 días",
-				sent: 160,
-				opened: 12,
-				errors: 4
-
-			}];
+	.service("TrackingService", ["$q", "$timeout", "CampanasService", "EntryTrackings", function($q, $timeout, CampanasService, EntryTrackings) {
 
 		this.getTrackings = function() {
 			var deferred = $q.defer();
 			
-			$timeout(function() {
-				deferred.resolve(trackings);
-			}, 1000);
+			var trackingsTraidos = EntryTrackings.query(function(){
+				deferred.resolve(trackingsTraidos);
+			});
+
 			return deferred.promise;  
 		}
 
 		this.getTracking = function(idCamp) {
 			var deferred = $q.defer();
 			
-			//Averiguar porqué no anda con promise
-			$timeout(function() {
-				deferred.resolve(trackings.find(x => x.id_campana == idCamp));
-			}, 500);
+			var trackingTraido = EntryTrackings.get({id:idCamp},function(){
+				deferred.resolve(trackingTraido);
+			});
+
 			return deferred.promise;  
 		}
 
 		this.addTracking = function(campana) {
 			var deferred = $q.defer();
+			
+			var tracking = {};
+			//Nich Richtig
+			tracking.id_campana = campana.id;
+			tracking.title = campana.title;
+			tracking.sent = 0;
+			tracking.opened = 0;
+			tracking.errors = 0;
+			
+			var trackingNuevo = EntryTrackings.save(tracking,function(){
+				deferred.resolve(trackingNuevo);
+			});
 
-			$timeout(function() {
-				var tracking = {};
-				//Nich Richtig
-				tracking.id = trackings[trackings.length - 1].id + 1;
-				tracking.id_campana = campana.id;
-				tracking.title = campana.title;
-				tracking.sent = 0;
-				tracking.opened = 0;
-				tracking.errors = 0;
-				deferred.resolve(trackings.push(tracking));
-			}, 1000);
 			return deferred.promise;
 		}
 

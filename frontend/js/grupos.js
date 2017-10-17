@@ -70,7 +70,7 @@ angular
 
 		this.getGruposCampana = function(campana) {
 			var deferred = $q.defer();
-			
+
 			var gruposCamp = [];
 			var i = 0;
 			campana.grupos.forEach(function (grupo) {
@@ -97,10 +97,10 @@ angular
 		this.addGrupo = function(grupo) {
 			var deferred = $q.defer();
 			
-			grupo.id = grupos[grupos.length - 1].id + 1;
-			$timeout(function() {
-				deferred.resolve(grupos.push(grupo));
-			}, 500);
+			var grupoCreado = EntryGrupos.save(grupo,function(){
+				deferred.resolve(grupoCreado);
+			});
+
 			return deferred.promise;  
 		}
 
@@ -198,6 +198,7 @@ angular
 			grupo.clientes = Object.values(grupo.clientes);
 			GruposService.addGrupo(grupo).then(function() {
 
-			})
+			});
+			$state.go('dashboard.grupos',{},{reload:true});
 		}
 }]);
