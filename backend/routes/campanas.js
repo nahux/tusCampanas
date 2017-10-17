@@ -8,7 +8,7 @@ var campanas = [
 									title:"Crucero 10 días Brasil",
 									desc:"Viaje en crucero de Buenos Aires a Rio de Janeiro", 
 									grupos: 
-										[{id:1}, {id:2}]
+										[{id:0}, {id:1}]
 								}];
 var campanasById = [
 										{
@@ -16,7 +16,7 @@ var campanasById = [
 											title:"Crucero 10 días Brasil",
 											desc:"Viaje en crucero de Buenos Aires a Rio de Janeiro", 
 											grupos: 
-												[{id:1}, {id:2}]
+												[{id:0}, {id:1}]
 										}];
 
 router.put('/:id', function(req, res, next) {

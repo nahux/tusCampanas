@@ -1,11 +1,11 @@
 //Factory para RESOURCE
 angular.module('inicio').factory('Entry', function($resource) {
-  return $resource('/api/campanas/:id',{'id' : '@id'}, {
-  		'query': { method: 'GET', isArray: true},
-      'update': { method: 'PUT' },
-      'save': { method: 'POST' },
-      'remove': { method:'DELETE' }
-    });
+	return $resource('/api/campanas/:id',{'id' : '@id'}, {
+			'query': { method: 'GET', isArray: true},
+			'update': { method: 'PUT' },
+			'save': { method: 'POST' },
+			'remove': { method:'DELETE' }
+		});
 });
 
 //Servicio campañas

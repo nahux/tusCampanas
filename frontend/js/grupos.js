@@ -1,14 +1,24 @@
+//Factory para RESOURCE
+angular.module('inicio').factory('EntryGrupos', function($resource) {
+	return $resource('/api/grupos/:id',{'id' : '@id'}, {
+			'query': { method: 'GET', isArray: true},
+			'update': { method: 'PUT' },
+			'save': { method: 'POST' },
+			'remove': { method:'DELETE' }
+		});
+});
+
 //Servicio grupos
 angular
 	.module('inicio')
-	.service("GruposService", ["$q", "$timeout", function($q, $timeout) {
+	.service("GruposService", ["$q", "$timeout", "EntryGrupos", function($q, $timeout, EntryGrupos) {
 		var clientes = [
 						{id: 1, nombre: "Juan", apellido: "Pérez"}, 
 						{id: 2, nombre: "Marcos", apellido: "López"},
 						{id: 3, nombre: "Darío", apellido: "Rossi"} ]
 		var grupos = 
 					[{	id: 1,
-						title: "Adultos", 
+						title: "Adultoso", 
 						desc: "Adultos, de 18 a 80 años", 
 						clientes: [
 									{id:2},
@@ -17,7 +27,7 @@ angular
 					 },
 					 {
 						id: 2,
-						title: "Adultos La Plata", 
+						title: "Adultoso La Plata", 
 						desc: "Adultos de La Plata, de 18 a 80 años", 
 						clientes: [
 									{id:1}
@@ -27,19 +37,20 @@ angular
 		this.getGrupos = function() {
 			var deferred = $q.defer();
 			
-			$timeout(function() {
-				deferred.resolve(grupos);
-			}, 1000); 
+			var gruposTraidos = EntryGrupos.query(function(){
+				deferred.resolve(gruposTraidos);
+			});
 			
-				return deferred.promise; 
+			return deferred.promise; 
 		}
 
 		this.getGrupo = function(idGrupo) {
 			var deferred = $q.defer();
 			
-			$timeout(function() {
-				deferred.resolve(grupos.find(x => x.id == idGrupo));
-			}, 500);
+			var grupoTraido = EntryGrupos.get({id:idGrupo},function(){
+				deferred.resolve(grupoTraido);
+			});
+
 			return deferred.promise;  
 		}
 
@@ -58,12 +69,16 @@ angular
 		}
 
 		this.getGruposCampana = function(campana) {
+			var deferred = $q.defer();
+			
 			var gruposCamp = [];
 			var i = 0;
 			campana.grupos.forEach(function (grupo) {
-		  		var idGrupo = grupo.id;
-		  		if (idGrupo) {
-					gruposCamp[i] = grupos.find(x => x.id == idGrupo);
+	  		var idGrupo = grupo.id;
+	  		if (idGrupo) {
+					gruposCamp[i] = EntryGrupos.get({id:idGrupo},function(){
+						deferred.resolve(gruposCamp[i]);
+					});
 				}
 				i++;
 			});
@@ -90,13 +105,13 @@ angular
 		}
 
 		this.deleteGrupo = function(grupo) {
-			if(grupos.find(x => x.id == grupo.id)){
-				grupos.splice(grupos.indexOf(grupo), 1); 
-				return true;
-			}
-			else{
-				return false;
-			}
+			var deferred = $q.defer();
+
+			var grupoBorrado = EntryGrupos.remove({id:grupo.id}, function(){
+				deferred.resolve(grupoBorrado);
+			});
+
+			return deferred.promise;
 		}
 
 	}]);
@@ -152,7 +167,7 @@ angular
 				} else{
 					alert('Hubo un error al borrar el grupo')
 				}
-				$state.go('dashboard.grupos',{});
+				$state.go('dashboard.grupos',{},{reload:true});
 			}
 		}
 }]);
