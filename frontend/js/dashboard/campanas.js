@@ -1,5 +1,5 @@
 //Factory para RESOURCE
-angular.module('inicio').factory('Entry', function($resource) {
+angular.module('inicio').factory('EntryCampanas', function($resource) {
 	return $resource('/api/campanas/:id',{'id' : '@id'}, {
 			'query': { method: 'GET', isArray: true},
 			'update': { method: 'PUT' },
@@ -11,13 +11,13 @@ angular.module('inicio').factory('Entry', function($resource) {
 //Servicio campañas
 angular
 	.module('inicio')
-	.service("CampanasService", ["$q", "$timeout","$http", "Entry", function($q, $timeout, $http, Entry) {
+	.service("CampanasService", ["$q", "$timeout","$http", "EntryCampanas", function($q, $timeout, $http, EntryCampanas) {
 		var campanas = [];
 
 		this.getCampanas = function() {
 			var deferred = $q.defer();
 			
-			var campanasTraidas = Entry.query(function() {
+			var campanasTraidas = EntryCampanas.query(function() {
 				deferred.resolve(campanasTraidas);
 			})
 			
@@ -28,7 +28,7 @@ angular
 		this.getCampana = function(idCamp) {
 			var deferred = $q.defer();
 
-			var campanaTraida = Entry.get({id:idCamp},function(){
+			var campanaTraida = EntryCampanas.get({id:idCamp},function(){
 				deferred.resolve(campanaTraida);
 			})
 			
@@ -58,7 +58,7 @@ angular
 		this.addCampana = function(campanaNew) {
 			var deferred = $q.defer();
 			
-			var campanaCreada = Entry.save(campanaNew,function(){
+			var campanaCreada = EntryCampanas.save(campanaNew,function(){
 				deferred.resolve(campanaCreada);
 			})
 
@@ -68,7 +68,7 @@ angular
 		this.modificarCampana = function(campana) {
 			var deferred = $q.defer();
 			
-			var campanaModificada = Entry.update(campana,function(){
+			var campanaModificada = EntryCampanas.update(campana,function(){
 				deferred.resolve(campanaModificada);
 			})
 
@@ -78,7 +78,7 @@ angular
 		this.deleteCampana = function(campana) {
 			var deferred = $q.defer();
 			
-			var campanaBorrada = Entry.remove({id:campana.id},function(){
+			var campanaBorrada = EntryCampanas.remove({id:campana.id},function(){
 				deferred.resolve(campanaBorrada);
 			})			
 
