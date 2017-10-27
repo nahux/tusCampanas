@@ -1,13 +1,13 @@
 //Controller
 angular
-	.module('inicio')
+	.module('app')
 	.controller('inicioController', function($scope) {
 
 	});
 
 //Componentes Inicio
 angular
-	.module('inicio')
+	.module('app')
 	.component('inicio', {
 		templateUrl: 'inicio.html'
 });

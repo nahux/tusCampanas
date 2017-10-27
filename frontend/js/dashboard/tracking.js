@@ -1,5 +1,5 @@
 //Factory para RESOURCE
-angular.module('inicio').factory('EntryTrackings', function($resource) {
+angular.module('app').factory('EntryTrackings', function($resource) {
 	return $resource('/api/trackings/:id',{'id' : '@id'}, {
 			'query': { method: 'GET', isArray: true},
 			'update': { method: 'PUT' },
@@ -10,7 +10,7 @@ angular.module('inicio').factory('EntryTrackings', function($resource) {
 
 //Service
 angular
-	.module('inicio')
+	.module('app')
 	.service("TrackingService", ["$q", "$timeout", "CampanasService", "EntryTrackings", function($q, $timeout, CampanasService, EntryTrackings) {
 
 		this.getTrackings = function() {
@@ -55,14 +55,14 @@ angular
 
 //Component
 angular
-	.module('inicio')
+	.module('app')
 	.component('tracking', {
 		templateUrl: 'dashboard/tracking.html'
 });
 
 //Controller
 angular
-	.module('inicio')
+	.module('app')
 	.controller('TrackingController', ["$scope","TrackingService","CampanasService", function($scope,TrackingService,CampanasService) {
 		$scope.refreshTrackings = function() {
 			TrackingService.getTrackings().then(function(trackings) {
@@ -78,14 +78,14 @@ angular
 
 //Component
 angular
-	.module('inicio')
+	.module('app')
 	.component('trackingDetalle', {
 		templateUrl: 'dashboard/tracking_detalle.html'
 });
 
 //Controller
 angular
-	.module('inicio')
+	.module('app')
 	.controller('TrackingDetalleController', ["$scope","TrackingService", "$state", "$stateParams", function($scope,TrackingService, $state, $stateParams) {
 		$scope.refreshTracking = function() {
 			TrackingService.getTracking($stateParams.id).then(function(tracking) {

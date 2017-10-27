@@ -1,6 +1,6 @@
 //Componentes Inicio
 angular
-	.module('inicio')
+	.module('app')
 	.component('dashboard', {
 		templateUrl: 'dashboard/dashboard.html'
 });

@@ -1,5 +1,5 @@
 //Factory para RESOURCE
-angular.module('inicio').factory('EntryCampanas', function($resource) {
+angular.module('app').factory('EntryCampanas', function($resource) {
 	return $resource('/api/campanas/:id',{'id' : '@id'}, {
 			'query': { method: 'GET', isArray: true},
 			'update': { method: 'PUT' },
@@ -10,7 +10,7 @@ angular.module('inicio').factory('EntryCampanas', function($resource) {
 
 //Servicio campañas
 angular
-	.module('inicio')
+	.module('app')
 	.service("CampanasService", ["$q", "$timeout","$http", "EntryCampanas", function($q, $timeout, $http, EntryCampanas) {
 		var campanas = [];
 
@@ -90,7 +90,7 @@ angular
 
 //Controller campañas
 angular
-	.module('inicio')
+	.module('app')
 	.controller("CampanasController", ["$scope", "CampanasService", "$http", function($scope, CampanasService, $http) {
 		// model
 		$scope.refreshCampanas = function() {
@@ -104,7 +104,7 @@ angular
 
 //Componente campañas
 angular
-	.module('inicio')
+	.module('app')
 	.component('campanas', {
 		templateUrl: 'dashboard/campanas.html'
 });
@@ -114,14 +114,14 @@ angular
 
 //Componente campaña
 angular
-	.module('inicio')
+	.module('app')
 	.component('campanaDetalle', {
 		templateUrl: 'dashboard/campana_detalle.html'
 });
 
 //Controller campaña
 angular
-	.module('inicio')
+	.module('app')
 	.controller("DetalleCampController", ["$scope", "CampanasService", "GruposService", "$state", "$stateParams", 
 																				function($scope, CampanasService, GruposService, $state, $stateParams) {
 		// model
@@ -155,28 +155,28 @@ angular
 //NUEVA CAMPAÑA
 //Componente nueva
 angular
-	.module('inicio')
+	.module('app')
 	.component('nuevaCampana', {
 		templateUrl: 'dashboard/nueva_campana.html'
 });
 
 //Componente nueva2
 angular
-	.module('inicio')
+	.module('app')
 	.component('nuevaCampana2', {
 		templateUrl: 'dashboard/nueva_campana_grupos.html'
 });
 
 //Componente nueva2
 angular
-	.module('inicio')
+	.module('app')
 	.component('nuevaCampana3', {
 		templateUrl: 'dashboard/nueva_campana_disenar.html'
 });
 
 //Controller
 angular
-	.module('inicio')
+	.module('app')
 	.controller("NuevaCampController", ["$scope", "CampanasService", "GruposService", "TrackingService", "$state", "$stateParams",
 										function($scope, CampanasService, GruposService, TrackingService, $state, $stateParams) {
 
@@ -228,14 +228,14 @@ angular
 
 //Componente campaña
 angular
-	.module('inicio')
+	.module('app')
 	.component('campanaModificar', {
 		templateUrl: 'dashboard/modificar_campana.html'
 });
 
 //Controller campaña
 angular
-	.module('inicio')
+	.module('app')
 	.controller("ModCampController", ["$scope", "CampanasService", "GruposService", "$state", "$stateParams", 
 																				function($scope, CampanasService, GruposService, $state, $stateParams) {
 		// model

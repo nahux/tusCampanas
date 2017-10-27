@@ -1,5 +1,5 @@
 //Factory para RESOURCE
-angular.module('inicio').factory('EntryGrupos', function($resource) {
+angular.module('app').factory('EntryGrupos', function($resource) {
 	return $resource('/api/grupos/:id',{'id' : '@id'}, {
 			'query': { method: 'GET', isArray: true},
 			'update': { method: 'PUT' },
@@ -10,7 +10,7 @@ angular.module('inicio').factory('EntryGrupos', function($resource) {
 
 //Servicio grupos
 angular
-	.module('inicio')
+	.module('app')
 	.service("GruposService", ["$q", "$timeout", "EntryGrupos", function($q, $timeout, EntryGrupos) {
 		var clientes = [
 						{id: 1, nombre: "Juan", apellido: "Pérez"}, 
@@ -118,7 +118,7 @@ angular
 
 //Controller grupos
 angular
-	.module('inicio')
+	.module('app')
 	.controller("GruposController", ["$scope", "GruposService", function($scope, GruposService) {
 		// model
 		$scope.refreshGrupos = function() {
@@ -132,7 +132,7 @@ angular
 
 //Componente grupos
 angular
-	.module('inicio')
+	.module('app')
 	.component('grupos', {
 		templateUrl: 'dashboard/grupos.html'
 });
@@ -141,13 +141,13 @@ angular
 //DETALLE
 //Componente grupo
 angular
-	.module('inicio')
+	.module('app')
 	.component('grupoDetalle', {
 		templateUrl: 'dashboard/grupo_detalle.html'
 });
 //Controller grupo
 angular
-	.module('inicio')
+	.module('app')
 	.controller("DetalleGrupoController", ["$scope", "GruposService", "$state", "$stateParams", function($scope, GruposService,$state,$stateParams) {
 		$scope.refreshGrupo = function() {
 			GruposService.getGrupo($stateParams.id).then(function(grupo) {
@@ -178,13 +178,13 @@ angular
 //NUEVO
 //Componente nuevogrupo
 angular
-	.module('inicio')
+	.module('app')
 	.component('nuevoGrupo', {
 		templateUrl: 'dashboard/nuevo_grupo.html'
 });
 
 angular
-	.module('inicio')
+	.module('app')
 	.controller("NuevoGrupoController", ["$scope", "GruposService", "$state", "$stateParams", function($scope, GruposService,$state,$stateParams) {
 		$scope.grupo = {clientes:[]};
 		$scope.refreshClientes = function() {
