@@ -106,13 +106,12 @@ angular
         });
     }
 
-    /*
     // manually bootstrap angular after the JWT token is retrieved from the server
     $(function () {
         // get JWT token from server
-        $.get('/app/token', function (token) {
+        $.get('/api/token', function (token) {
             window.jwtToken = token;
  
             angular.bootstrap(document, ['app']);
         });
-    });*/
+    });

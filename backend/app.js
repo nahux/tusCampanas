@@ -15,8 +15,12 @@ var campanas = require('./routes/campanas');
 var grupos = require('./routes/grupos');
 var trackings = require('./routes/trackings');
 var user = require('./routes/user');
+var token = require('./routes/token');
 
 var app = express();
+
+// use JWT auth to secure the api
+app.use('/api/users', expressJwt({ secret: config.secret }).unless({ path: ['/api/users/authenticate', '/api/users/register'] }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,7 +29,9 @@ app.use(cookieParser())
 app.use('/api/campanas', campanas);
 app.use('/api/grupos', grupos);
 app.use('/api/trackings', trackings);
-app.use('/api/user', user);
+app.use('/api/users', user);
+app.use('/api/token', token);
+
 
 app.use(express.static('../frontend'));
 
