@@ -1,7 +1,8 @@
+var config = require('../config.json');
 var express = require('express');
 var router = express.Router();
 var uuid = require('uuid/v4');
-
+var userService = require('../models/user.service');
 
 //Loh in
 router.post('/authenticate', function(req, res) {
@@ -19,6 +20,7 @@ router.post('/authenticate', function(req, res) {
 				res.status(400).send(err);
 		});
 });
+
 
 //Registro
 router.post('/register', function(req, res) {
@@ -79,3 +81,5 @@ router.delete('/:_id', function(req, res) {
 					res.status(400).send(err);
 			});
 });
+
+module.exports = router;
