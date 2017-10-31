@@ -2,6 +2,7 @@
 		
 	<div class="form input-group">
 		<h1>Iniciar Sesión</h1><br>
+		<p style="color:red">{{message}}</p>
 		<!-- Form -->
 		<form name="login" action="dashboard/dashboard.html" method="post" novalidate>
 			<label>Usuario</label>
@@ -15,7 +16,7 @@
 			<a href="#" >¡Regístrese aquí!</a><br>
 			<br>
 		</form>
-		<a class="btn btn-default" ng-disabled="login.name.$invalid || login.pass.$invalid"  ui-sref="dashboard.campanas" role="button" ng-click="validateLogin(user)">Entrar</a>
+		<a class="btn btn-default" ng-disabled="login.name.$invalid || login.pass.$invalid"  ui-sref="" role="button" ng-click="validateLogin(user)">Entrar</a>
 		<!--  -->
 		<a ui-sref="inicio" style="margin-left:20px"><-- Salir</a> 
 	</div>

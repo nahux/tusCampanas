@@ -209,13 +209,12 @@ angular
 		}
 
 		$scope.addCampana = function(campana) {
-			var nuevaCampana;
-			CampanasService.addCampana(campana).then(function() {
-				nuevaCampana = campana;
+			var nuevaCampana = {};
+			CampanasService.addCampana(campana).then(function(nueva) {
+				TrackingService.addTracking(nueva).then(function() {
+				});
 			});
-			TrackingService.addTracking(campana).then(function() {
-
-			});
+			
 			$state.go('dashboard.campanas',{},{reload:true});
 		}
 

@@ -10,7 +10,7 @@ router.post('/authenticate', function(req, res) {
 		.then(function (token) {
 				if (token) {
 						// authentication successful
-						res.send({ token: token });
+						res.send({ token: token, username: req.body.username});
 				} else {
 						// authentication failed
 						res.sendStatus(401);

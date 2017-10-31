@@ -4,3 +4,4 @@ angular
 	.component('dashboard', {
 		templateUrl: 'dashboard/dashboard.html'
 });
+

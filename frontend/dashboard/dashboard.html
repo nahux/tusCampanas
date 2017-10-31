@@ -4,8 +4,9 @@
 			<a class="navbar-brand" href="#">
 				<img alt="TusCampañas" src="">
 			</a>
-			
-			<p class="navbar-right navbar-text"> <a href="index.html" class="navbar-link">Salir</a></p>
+			<div class="navbar-right navbar-text" ng-controller="loginController">
+				<p> <a href="#" class="navbar-link" ng-click="logOut()">Salir</a></p>
+			</div>
 		</div>
 	</div>
 </nav>

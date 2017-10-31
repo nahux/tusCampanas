@@ -20,7 +20,7 @@ var token = require('./routes/token');
 var app = express();
 
 // use JWT auth to secure the api
-app.use('/api/users', expressJwt({ secret: config.secret }).unless({ path: ['/api/users/authenticate', '/api/users/register'] }));
+app.use('/api/', expressJwt({ secret: config.secret }).unless({ path: ['/api/users/authenticate', '/api/users/register'] }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,7 +30,7 @@ app.use('/api/campanas', campanas);
 app.use('/api/grupos', grupos);
 app.use('/api/trackings', trackings);
 app.use('/api/users', user);
-app.use('/api/token', token);
+app.use('/app/token', token);
 
 
 app.use(express.static('../frontend'));
