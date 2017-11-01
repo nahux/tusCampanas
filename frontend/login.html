@@ -4,7 +4,7 @@
 		<h1>Iniciar Sesión</h1><br>
 		<p style="color:red">{{message}}</p>
 		<!-- Form -->
-		<form name="login" action="dashboard/dashboard.html" method="post" novalidate>
+		<form name="login" action="" method="post" novalidate>
 			<label>Usuario</label>
 			<input type="text" name="name" ng-model="user.name" class="form-control" required><br>
 			<p ng-show="login.name.$touched && login.name.$invalid" style="color:red">Debe ingresar un usuario</p>
@@ -13,7 +13,7 @@
 			<input type="password" name="pass" ng-model="user.pass" class="form-control" required><br><br><br>
 			<p ng-show="login.pass.$touched && login.pass.$invalid" style="color:red">Debe ingresar una contraseña</p>
 			
-			<a href="#" >¡Regístrese aquí!</a><br>
+			<a href="" ui-sref="register">¡Regístrese aquí!</a><br>
 			<br>
 		</form>
 		<a class="btn btn-default" href='' ng-disabled="login.name.$invalid || login.pass.$invalid" role="button" ng-click="validateLogin(user)">Entrar</a>

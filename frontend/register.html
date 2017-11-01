@@ -1,0 +1,32 @@
+<div style="position: fixed" class="contenidoInterno" ng-controller="registerController">
+		
+	<div class="panel panel-default">
+		<div class="panel-heading">
+		<!--  -->	 
+		</div>
+			<div style="margin-top:2%; margin-bottom: 40%" class="form input-group">
+				<h1>Registrarse</h1><br>
+				
+				<form name="registro" method="post" ng-submit="registerUser(user)">
+					<label>Nombre</label>
+					<input type="text" name="firstName" ng-model="user.firstName" class="form-control" required><br>
+
+					<label>Apellido</label>
+					<input type="text" name="lastName" ng-model="user.lastName" class="form-control" required><br>
+
+					<label>Email</label>
+					<input type="text" name="email" ng-model="user.email" class="form-control" required><br><br><br><br>
+
+					<label>Usuario</label>
+					<input type="text" name="username" ng-model="user.username" class="form-control" required><br>
+
+					<label>Contraseña</label>
+					<input type="password" name="password" ng-model="user.password" class="form-control" required><br><br><br>
+					
+					<input type="submit" name="submit" value="¡Regístrate!">
+				</form>
+				
+				<a ui-sref="login" style="margin-left:20px"><-- Volver</a>
+			</div>
+	</div>
+</div>

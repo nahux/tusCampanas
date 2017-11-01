@@ -111,7 +111,7 @@ angular
 
 		// Redirecciono al login si no estoy logueado y quiero acceder a pagina restringida
 		$rootScope.$on('$locationChangeStart', function (event, next, current) {
-				var publicPages = ['/login', '/', ''];
+				var publicPages = ['/login', '/', '/register'];
 				var restrictedPage = publicPages.indexOf($location.path()) === -1;
 				if (restrictedPage && !$cookieStore.get('currentUser')) {
 						$location.path('/login');

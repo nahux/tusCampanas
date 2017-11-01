@@ -12,5 +12,7 @@ angular
 									 									 function($scope,$http, $rootScope,$state,UserService) {
 		$scope.message = '';
 
-		
+		$scope.registerUser = function(user) {
+			alert('Hola '+ user.firstName);
+		}
 }]);
