@@ -20,6 +20,13 @@ angular
 				component: 'login'
 			});
 
+		//Estado Registro
+		$stateProvider
+			.state('register', {
+				url: '/register',
+				component: 'register'
+			});
+
 		$stateProvider
 			.state('dashboard', {
 				url: '/dashboard',
@@ -96,20 +103,20 @@ angular
 			});
 	}
 
-	function run($http, $rootScope, $window, $location, $rootScope) {
+	function run($http, $rootScope, $window, $location, $rootScope, $cookieStore) {
 		// Mantener usuario logueado si hace refresh
-		if ($rootScope.currentUser) {
-				$http.defaults.headers.common.Authorization = 'Bearer ' + $rootScope.currentUser.token;
+		if ($cookieStore.get('currentUser')) {
+				$http.defaults.headers.common.Authorization = 'Bearer ' + $cookieStore.get('currentUser').token;
 		}
 
 		// Redirecciono al login si no estoy logueado y quiero acceder a pagina restringida
 		$rootScope.$on('$locationChangeStart', function (event, next, current) {
 				var publicPages = ['/login', '/', ''];
 				var restrictedPage = publicPages.indexOf($location.path()) === -1;
-				if (restrictedPage && !$rootScope.currentUser) {
+				if (restrictedPage && !$cookieStore.get('currentUser')) {
 						$location.path('/login');
 				}
-				if ($location.path() == '/login' && $rootScope.currentUser) {
+				if ($location.path() == '/login' && $cookieStore.get('currentUser')) {
 					$location.path('/dashboard/campanas');
 				}
 		});

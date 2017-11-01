@@ -8,7 +8,8 @@ angular
 //Controller
 angular
 	.module('app')
-	.controller('loginController', function($scope,$http, $rootScope,$state) {
+	.controller('loginController', ['$scope','$http','$rootScope','$state','$cookieStore','UserService', 
+																  function($scope,$http, $rootScope,$state,$cookieStore,UserService) {
 		$scope.message = '';
 		$scope.validateLogin = function(user) {
 			var userdata = {
@@ -16,22 +17,28 @@ angular
 				password : user.pass
 			};
 			//Validar login
-			$http.post('/api/users/authenticate', userdata)
-				.then(function onSuccess(response) {
-					// store username and token in local storage to keep user logged in between page refreshes
-					$rootScope.currentUser = { username: response.data.username, token: response.data.token };
-					// add jwt token to auth header for all requests made by the $http service
-					$http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
+			UserService.autenticar(userdata)
+				.then(function(token){
+					// Agrego token al header auth para las próximas requests
+					$http.defaults.headers.common.Authorization = 'Bearer ' + token;
+					// Guardo token y usuario en cookie
+					var currentUser = { username: userdata.username, token: token };
+					$cookieStore.put('currentUser', currentUser);
+					$rootScope.username = currentUser.username;
 
-					$state.go('dashboard.campanas', {});
-
-				}).catch(function onError(response) {
+					//Redirigo a campañas			
+					$state.go('dashboard.campanas',{}, {reload:true});
+				},
+				function(data){
 					$scope.message = 'Usuario y/o contraseña incorrectos';
 				});
 		}
 
 		$scope.logOut = function() {
-			delete $rootScope.currentUser;
+			//Borro el usuario de la rootScope y el token del header
+			delete $rootScope.username;
+			$cookieStore.remove('currentUser');
 			$http.defaults.headers.common.Authorization = '';
 		}
-});
+
+}]);
