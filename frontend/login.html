@@ -16,7 +16,7 @@
 			<a href="" ui-sref="register">¡Regístrese aquí!</a><br>
 			<br>
 		</form>
-		<a class="btn btn-default" href='' ng-disabled="login.name.$invalid || login.pass.$invalid" role="button" ng-click="validateLogin(user)">Entrar</a>
+		<a class="btn btn-default" id="login" href='' ng-disabled="login.name.$invalid || login.pass.$invalid" role="button" ng-click="validateLogin(user)">Entrar</a>
 		<!--  -->
 		<a ui-sref="inicio" style="margin-left:20px"><-- Salir</a> 
 	</div>

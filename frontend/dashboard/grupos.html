@@ -4,8 +4,7 @@
 		<input type="text" ng-model="filtro" class="form-control" placeholder="Buscar Grupos...">  
 	</div><br>
 	<div class="list-group">
-		<button type="button" ng-repeat="grupo in grupos | filter: filtro" class="list-group-item" ui-sref="dashboard.grupos.detalle({ id: grupo.id })"> 
-			{{$index + 1}} - {{grupo.title}} 
+		<button type="button" ng-repeat="grupo in grupos | filter: filtro" id="grupo{{$index}}" class="list-group-item" ui-sref="dashboard.grupos.detalle({ id: grupo.id })">  {{$index + 1}} - {{grupo.title}} 
 			<span class="icon-angle-right pull-right">></span>
 		</button>
 	</div>
