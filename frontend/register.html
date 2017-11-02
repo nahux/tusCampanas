@@ -7,6 +7,7 @@
 			<div style="margin-top:2%; margin-bottom: 40%" class="form input-group">
 				<h1>Registrarse</h1><br>
 				
+				<p style="color:red" ng-repeat="errormsg in messages">{{errormsg.msg}}</p>
 				<form name="registro" method="post" ng-submit="registerUser(user)">
 					<label>Nombre</label>
 					<input type="text" name="firstName" ng-model="user.firstName" class="form-control" required><br>
@@ -18,15 +19,16 @@
 					<input type="text" name="email" ng-model="user.email" class="form-control" required><br><br><br><br>
 
 					<label>Usuario</label>
-					<input type="text" name="username" ng-model="user.username" class="form-control" required><br>
+					<input type="text" name="username" minlength="8" ng-model="user.username" class="form-control" required><br>
 
 					<label>Contraseña</label>
-					<input type="password" name="password" ng-model="user.password" class="form-control" required><br><br><br>
+					<input type="password" name="password" minlength="8" ng-model="user.password" class="form-control" required><br><br><br><br>
 					
-					<input type="submit" name="submit" value="¡Regístrate!">
+					<input class="btn btn-default" type="submit" name="submit" value="¡Regístrate!">
+					<a class="btn btn-default" ui-sref="login" style="margin-left:20px"> < Volver</a>
 				</form>
 				
-				<a ui-sref="login" style="margin-left:20px"><-- Volver</a>
+				
 			</div>
 	</div>
 </div>

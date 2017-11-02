@@ -24,13 +24,28 @@ router.post('/authenticate', function(req, res) {
 
 //Registro
 router.post('/register', function(req, res) {
-	userService.create(req.body)
-		.then(function () {
-				res.sendStatus(200);
-		})
-		.catch(function (err) {
-				res.status(400).send(err);
-		});
+
+	//Validaciones
+	req.checkBody("firstName","Entre un nombre con letras entre 2 y 50 caracteres").isAlpha().isLength(2,50);
+	req.checkBody("lastName","Entre un apellido con letras entre 2 y 50 caracteres").isAlpha().isLength(2,50);
+	req.checkBody("email","Entre un email válido").isEmail();
+	req.checkBody("username","Entre un usuario alfanumérico entre 8 y 30 caracteres").isAlphanumeric().isLength(8,30);
+	req.checkBody("password","Entre una contraseña alfanumérica entre 8 y 20 caracteres").isAlphanumeric().isLength(8,20);
+
+	var errors = req.validationErrors();
+	if(errors){
+		res.status(400).send(errors);
+	}
+	else{
+		// res.status(200).send('todo ok');
+		userService.create(req.body)
+			.then(function () {
+					res.sendStatus(200);
+			})
+			.catch(function (err) {
+					res.status(400).send(err);
+			});
+	}
 });
 
 //Traer usuario logueado
@@ -83,3 +98,9 @@ router.delete('/:_id', function(req, res) {
 });
 
 module.exports = router;
+
+/*
+//Funciones
+function validarAlfaNumerico(campo) {
+	return ((!campo) && (!campo.match(/^[0-9a-z]+$/)) ? false : true;
+}*/
