@@ -29,4 +29,19 @@ angular
 
 				return defered.promise;
 		}
+
+
+		this.getUserData = function(userdata) {
+			var defered = $q.defer();
+
+			//Llamo a la api para traer datos de usuario
+			$http.post('/api/users/current', userdata)
+				.then(function(response) {
+					defered.resolve(response)
+				},function(response) {
+					defered.reject(response);
+				});
+
+				return defered.promise;
+		}
 }]);

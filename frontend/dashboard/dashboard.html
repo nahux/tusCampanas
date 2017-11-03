@@ -5,7 +5,7 @@
 				<img alt="TusCampañas" src="">
 			</a>
 			<div class="navbar-right navbar-text" ng-controller="loginController">
-				<p>{{$root.username}}</p>
+				<p><a ui-sref="dashboard.profile">{{$root.username}}</a></p>
 				<p> <a href="#" class="navbar-link" ng-click="logOut()">Salir</a></p>
 			</div>
 		</div>

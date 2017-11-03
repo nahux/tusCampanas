@@ -33,6 +33,13 @@ angular
 				component: 'dashboard',
 			});
 
+		//Estado profile
+		$stateProvider
+			.state('dashboard.profile', {
+				url: '/profile',
+				component: 'profile',
+			});
+
 		//Estados campañas
 		$stateProvider
 			.state('dashboard.campanas', {
@@ -107,6 +114,7 @@ angular
 		// Mantener usuario logueado si hace refresh
 		if ($cookieStore.get('currentUser')) {
 				$http.defaults.headers.common.Authorization = 'Bearer ' + $cookieStore.get('currentUser').token;
+				$rootScope.username = $cookieStore.get('currentUser').username;
 		}
 
 		// Redirecciono al login si no estoy logueado y quiero acceder a pagina restringida

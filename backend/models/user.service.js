@@ -54,6 +54,25 @@ function getById(_id) {
  
 		return deferred.promise;
 }
+
+function getByUsername(username) {
+		var deferred = Q.defer();
+ 	
+ 		console.log('getByUsername, username: '+username);
+		db.users.find({username : username.toString()}, function (err, user) {
+				if (err) deferred.reject(err);
+ 
+				if (user) {
+						// return user (without hashed password)
+						deferred.resolve(_.omit(user, 'hash'));
+				} else {
+						// user not found
+						deferred.resolve();
+				}
+		});
+ 
+		return deferred.promise;
+}
  
 function create(userParam) {
 		var deferred = Q.defer();

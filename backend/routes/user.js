@@ -9,10 +9,10 @@ router.post('/authenticate', function(req, res) {
 	userService.authenticate(req.body.username, req.body.password)
 		.then(function (token) {
 				if (token) {
-						// authentication successful
+						//Exitosa
 						res.send({ token: token, username: req.body.username});
 				} else {
-						// authentication failed
+						//Fallida
 						res.sendStatus(401);
 				}
 		})
@@ -37,7 +37,6 @@ router.post('/register', function(req, res) {
 		res.status(400).send(errors);
 	}
 	else{
-		// res.status(200).send('todo ok');
 		userService.create(req.body)
 			.then(function () {
 					res.sendStatus(200);
@@ -50,7 +49,8 @@ router.post('/register', function(req, res) {
 
 //Traer usuario logueado
 router.get('/current', function(req, res) {
-	userService.getById(req.user.sub)
+	console.log('req: ');
+	userService.getByUsername(req.body.username)
 		.then(function (user) {
 				if (user) {
 						res.send(user);
@@ -98,9 +98,3 @@ router.delete('/:_id', function(req, res) {
 });
 
 module.exports = router;
-
-/*
-//Funciones
-function validarAlfaNumerico(campo) {
-	return ((!campo) && (!campo.match(/^[0-9a-z]+$/)) ? false : true;
-}*/
