@@ -6,7 +6,9 @@
 		</div>
 		<div class="panel-body">
 			
-			<p ng-repeat="mensaje in messages" >{{mensaje.msg}}</p>
+			<p style="color:green">{{successMessage}}</p>
+			<p style="color:red" ng-repeat="mensaje in errorMessages" >{{mensaje.msg}}</p>
+
 			<form name="update" method="post" ng-submit="updateUser(user)">
 				<div style="padding:0px; margin:0px" class="container">
 					<div class="row">

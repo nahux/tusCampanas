@@ -10,8 +10,11 @@ angular
 	.module('app')
 	.controller('profileController', ['$scope','$rootScope','$state','$cookieStore','UserService', 
 									 									 function($scope,$rootScope,$state,$cookieStore,UserService) {
-		$scope.messages = {};
+		$scope.errorMessages = {};
+		$scope.successMessage = '';
+
 		$scope.user = {};
+
 
 		$scope.refreshUser = function() {
 
@@ -32,13 +35,17 @@ angular
 			UserService.actualizarUser(userdata)
 				.then(function(response) {
 					//Se modificó con éxito
-					$scope.messages[0].msg = '¡Datos modificados satisfactoriamente!';
+					$scope.message = '';
+					$scope.errorMessages = {};
+					$scope.successMessage = '¡Datos modificados satisfactoriamente!';
 				},
 				function(response) {
 					//Fallo la modificacion
-					$scope.messages = response.data ;
+					$scope.message = '';
+					$scope.successMessage = '';
+					$scope.errorMessages = response.data ;
 				})
-
+			
 			$scope.refreshUser();
 		}
-}]);
+}]);;
