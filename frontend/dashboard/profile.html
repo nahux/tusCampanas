@@ -5,8 +5,9 @@
 			Datos de usuario
 		</div>
 		<div class="panel-body">
-
-			<form name="update" method="post" ng-submit="updaterUser(user)">
+			
+			<p ng-repeat="mensaje in messages" >{{mensaje.msg}}</p>
+			<form name="update" method="post" ng-submit="updateUser(user)">
 				<div style="padding:0px; margin:0px" class="container">
 					<div class="row">
 						<div class="col-sm-6">
@@ -36,7 +37,7 @@
 			</div>
 
 			<input class="btn btn-default" type="submit" name="submit" value="Actualizar">
-			<a class="btn btn-default" ui-sref="dashboard.campanas" style="margin-left:20px"> < Volver</a>
+			<a class="btn btn-default" ui-sref="dashboard.campanas" style="margin-left:20px"> <- Volver</a>
 		</form>
 			
 		</div>

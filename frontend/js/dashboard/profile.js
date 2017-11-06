@@ -22,8 +22,23 @@ angular
 				},
 				function(response) {
 					//Muestro errores
-					$scope.messages = response.data;
+					$scope.message = response.data;
 				});
 		}
 		$scope.refreshUser();
+
+		$scope.updateUser = function(userdata) {
+
+			UserService.actualizarUser(userdata)
+				.then(function(response) {
+					//Se modificó con éxito
+					$scope.messages[0].msg = '¡Datos modificados satisfactoriamente!';
+				},
+				function(response) {
+					//Fallo la modificacion
+					$scope.messages = response.data ;
+				})
+
+			$scope.refreshUser();
+		}
 }]);

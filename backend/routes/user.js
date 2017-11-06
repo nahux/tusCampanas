@@ -64,19 +64,31 @@ router.get('/current', function(req, res) {
 
 //Actualizar usuario
 router.put('/:_id', function(req, res) {
-	var userId = req.user.sub;
-	if (req.params._id !== userId) {
-			// can only update own account
-			return res.status(401).send('You can only update your own account');
-	}
 
-	userService.update(userId, req.body)
+	//Validaciones
+	req.checkBody("firstName","Entre un nombre con letras entre 2 y 50 caracteres").isAlpha().isLength(2,50);
+	req.checkBody("lastName","Entre un apellido con letras entre 2 y 50 caracteres").isAlpha().isLength(2,50);
+	req.checkBody("email","Entre un email válido").isEmail();
+
+	var errors = req.validationErrors();
+	if(errors){
+		res.status(400).send(errors);
+	}
+	else{
+		var userId = req.user.sub;
+		if (req.params._id !== userId) {
+				// Checkeo de no actualizar otra cuenta ajena
+				return res.status(401).send('Solo puedes actualizar tu cuenta');
+		}
+
+		userService.update(userId, req.body)
 			.then(function () {
 					res.sendStatus(200);
 			})
 			.catch(function (err) {
 					res.status(400).send(err);
 			});
+	}
 });
 
 //Borrar usuario

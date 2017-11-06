@@ -44,4 +44,18 @@ angular
 
 				return defered.promise;
 		}
+
+		this.actualizarUser = function(userdata) {
+			var defered = $q.defer();
+
+			//Llamo a api para actualizar usuario
+			$http.put('/api/users/'+userdata._id, userdata)
+				.then(function(response) {
+					defered.resolve(response);
+				},function(response) {
+					defered.reject(response);
+				});
+
+			return defered.promise;
+		}
 }]);
