@@ -5,8 +5,40 @@
 			Datos de usuario
 		</div>
 		<div class="panel-body">
-			<label>{{user.username}}</label>
 
+			<form name="update" method="post" ng-submit="updaterUser(user)">
+				<div style="padding:0px; margin:0px" class="container">
+					<div class="row">
+						<div class="col-sm-6">
+							<label>Usuario</label>
+							<input type="text" ng-model="user.username" name="username" class="form-control" disabled><br>
+						</div>
+						<div class="col-sm-6">
+							<label>Email</label>
+							<input type="text" name="email" ng-model="user.email" class="form-control" required><br>
+					</div>
+					</div>
+
+
+					<div class="row">
+						<div class="col-sm-6">
+							<label>Nombre</label>
+							<input type="text" name="firstName" ng-model="user.firstName" class="form-control" required><br>
+						</div>
+				
+
+					<div class="col-sm-6">
+						<label>Apellido</label>
+						<input type="text" name="lastName" ng-model="user.lastName" class="form-control" required><br>
+					</div>
+				</div>
+				<br><br>
+			</div>
+
+			<input class="btn btn-default" type="submit" name="submit" value="Actualizar">
+			<a class="btn btn-default" ui-sref="dashboard.campanas" style="margin-left:20px"> < Volver</a>
+		</form>
+			
 		</div>
 	</div>
 </div>

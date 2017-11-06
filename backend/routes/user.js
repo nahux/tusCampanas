@@ -49,8 +49,7 @@ router.post('/register', function(req, res) {
 
 //Traer usuario logueado
 router.get('/current', function(req, res) {
-	console.log('req: ');
-	userService.getByUsername(req.body.username)
+	userService.getById(req.user.sub)
 		.then(function (user) {
 				if (user) {
 						res.send(user);

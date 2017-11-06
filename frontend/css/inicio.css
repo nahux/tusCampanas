@@ -68,3 +68,11 @@ html, body {
 }
 
 /* FIN DASHBOARD */
+
+/* PROFILE */
+.input-campo {
+	float: left;
+	margin-right: 4%;
+	margin-bottom: 2%;
+}
+/* FIN PROFILE */

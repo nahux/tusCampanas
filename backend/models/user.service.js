@@ -11,6 +11,7 @@ db.bind('users');
 var service = {};
 
 service.authenticate = authenticate;
+service.getByUsername = getByUsername;
 service.getById = getById;
 service.create = create;
 service.update = update;

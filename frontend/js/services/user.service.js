@@ -31,11 +31,11 @@ angular
 		}
 
 
-		this.getUserData = function(userdata) {
+		this.getUserData = function() {
 			var defered = $q.defer();
 
 			//Llamo a la api para traer datos de usuario
-			$http.post('/api/users/current', userdata)
+			$http.get('/api/users/current')
 				.then(function(response) {
 					defered.resolve(response)
 				},function(response) {

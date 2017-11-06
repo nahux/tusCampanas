@@ -13,18 +13,17 @@ angular
 		$scope.messages = {};
 		$scope.user = {};
 
-		$scope.refreshUser = function(username) {
-			var userdata = { username: username};
+		$scope.refreshUser = function() {
 
-			UserService.getUserData(userdata)
+			UserService.getUserData()
 				.then(function(response){
 					//Logueo al usuario
-					$scope.user = response;
+					$scope.user = response.data;
 				},
 				function(response) {
 					//Muestro errores
 					$scope.messages = response.data;
 				});
 		}
-		$scope.refreshUser($rootScope.userdata);
+		$scope.refreshUser();
 }]);

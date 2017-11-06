@@ -32,8 +32,18 @@ describe('Logeando', function() {
 
 			cy.get('#grupos').click()
 			cy.wait(200)
-			cy.get('#grupo0').should('have.value', 'Adultos')
-			//cy.get('#grupo1').should('include', 'Adultos La Plata')
+			cy.get('#grupo0')
+			cy.get('#grupo1')
+		})
+
+		it('Voy a profile despues de loguearme', function(){
+			cy.get('input[name=name]').type('nahuapas')
+			cy.get('input[name=pass]').type('12345678')
+			cy.get('#login').click({force:true})
+
+			cy.url().should('include', '/dashboard/campanas')
+
+			cy.
 		})
 	})
 })
