@@ -8,16 +8,16 @@ var userService = require('../models/user.service');
 router.post('/authenticate', function(req, res) {
 	userService.authenticate(req.body.username, req.body.password)
 		.then(function (token) {
-				if (token) {
-						//Exitosa
-						res.send({ token: token, username: req.body.username});
-				} else {
-						//Fallida
-						res.sendStatus(401);
-				}
+			if (token) {
+					//Exitosa
+					res.send({ token: token, username: req.body.username});
+			} else {
+					//Fallida
+					res.sendStatus(401);
+			}
 		})
 		.catch(function (err) {
-				res.status(400).send(err);
+			res.status(400).send(err);
 		});
 });
 

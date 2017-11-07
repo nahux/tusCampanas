@@ -18,7 +18,7 @@ var token = require('./routes/token');
 var app = express();
 
 // Uso JWT para asegurar el acceso a la API de lugares restringidos
-app.use('/api/', expressJwt({ secret: config.secret }).unless({ path: ['/api/users/authenticate', '/api/users/register'] }));
+app.use('/api/', expressJwt({ secret: config.secret }).unless({ path: ['/api/users/authenticate', '/api/users/register', '/api/campanas'] }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

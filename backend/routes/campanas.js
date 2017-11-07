@@ -1,6 +1,8 @@
+var config = require('../config.json');
 var express = require('express');
 var router = express.Router();
 var uuid = require('uuid/v4');
+var campanasService = require('../models/campanas.service');
 
 var campanas = [
 								{
@@ -65,11 +67,30 @@ router.delete('/:id', function(req, res, next) {
 
 
 router.post('/', function(req, res, next) {
-	var campana = req.body;
-	campana.id = uuid();
-	campanas.push(campana);
-	campanasById[campana.id] = campana;
-	res.send(campana);
+
+	//Validaciones
+	req.checkBody("title","Entre un titulo alfanumérico entre 4 y 50 caracteres").isLength(4,50);
+	req.checkBody("desc","Entre una descripción con letras entre 4 y 250 caracteres").isLength(4,250);
+	
+	var errors = {};
+	errors = req.validationErrors();
+	
+	if(!req.body.grupos) {
+		errors[0].msg = 'Debe seleccionar al menos un grupo';
+	}
+	if(errors){
+		res.status(400).send(errors);
+	}
+	else{
+		campanasService.create(req.body)
+			.then(function () {
+					res.sendStatus(200);
+			})
+			.catch(function (err) {
+					res.status(400).send(err);
+			});
+	}
+	
 });
 
 module.exports = router;
