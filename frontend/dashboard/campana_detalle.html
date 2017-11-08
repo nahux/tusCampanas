@@ -17,7 +17,7 @@
 			<li ng-repeat="grupo in gruposCamp">{{grupo.title}}</li>
 		</ul>
 		<br>
-		<button class="btn btn-default" ui-sref="dashboard.campanas.modificar({ id: campana.id })">Editar</button>
+		<button class="btn btn-default" ui-sref="dashboard.campanas.modificar({ id: campana._id })">Editar</button>
 		<button style="margin-left:25px" ng-click="deleteCampana(campana)" class="btn btn-default">Borrar</button>
 	</div>
 </div>

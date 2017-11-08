@@ -19,7 +19,9 @@ angular
 			
 			var campanasTraidas = EntryCampanas.query(function() {
 				deferred.resolve(campanasTraidas);
-			})
+			},function(error){
+				deferred.reject(error.data);
+			}); 
 			
 			return deferred.promise;
 		}
@@ -30,6 +32,8 @@ angular
 
 			var campanaTraida = EntryCampanas.get({id:idCamp},function(){
 				deferred.resolve(campanaTraida);
+			},function(error){
+				deferred.reject(error.data);
 			})
 			
 			return deferred.promise;  
@@ -60,6 +64,8 @@ angular
 			
 			var campanaCreada = EntryCampanas.save(campanaNew,function(){
 				deferred.resolve(campanaCreada);
+			},function(error){
+				deferred.reject(error.data);
 			})
 
 			return deferred.promise;  
@@ -68,8 +74,10 @@ angular
 		this.modificarCampana = function(campana) {
 			var deferred = $q.defer();
 			
-			var campanaModificada = EntryCampanas.update(campana,function(){
+			var campanaModificada = EntryCampanas.update({id:campana._id},campana,function(){
 				deferred.resolve(campanaModificada);
+			},function(error){
+				deferred.reject(error.data);
 			})
 
 			return deferred.promise;  
@@ -78,8 +86,10 @@ angular
 		this.deleteCampana = function(campana) {
 			var deferred = $q.defer();
 			
-			var campanaBorrada = EntryCampanas.remove({id:campana.id},function(){
+			var campanaBorrada = EntryCampanas.remove({id:campana._id},campana,function(){
 				deferred.resolve(campanaBorrada);
+			},function(error){
+				deferred.reject(error.data);
 			})			
 
 			return deferred.promise;  
@@ -126,9 +136,13 @@ angular
 																				function($scope, CampanasService, GruposService, $state, $stateParams) {
 		// model
 		$scope.refreshCampana = function() {
-			CampanasService.getCampana($stateParams.id).then(function(campana) {
+			CampanasService.getCampana($stateParams.id)
+			.then(function(campana) {
 				$scope.campana = campana;
 				$scope.getGruposCampana(campana);
+			},function(error) {
+				alert(error);
+				$state.go('dashboard.campanas',{},{reload:true});
 			});
 		}
 		$scope.getGruposCampana = function(campana) {
@@ -239,10 +253,14 @@ angular
 																				function($scope, CampanasService, GruposService, $state, $stateParams) {
 		// model
 		$scope.refreshCampana = function() {
-			CampanasService.getCampana($stateParams.id).then(function(campana) {
-				$scope.campana = campana;
-				$scope.getGruposCampana(campana);
-			});
+			CampanasService.getCampana($stateParams.id)
+				.then(function(campana) {
+					$scope.campana = campana;
+					$scope.getGruposCampana(campana);
+				},function(error) {
+					alert(error);
+					$state.go('dashboard.campanas',{},{reload:true});
+				});
 		}
 		$scope.getGruposCampana = function(campana) {
 			$scope.gruposCamp = GruposService.getGruposCampana(campana);

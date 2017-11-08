@@ -18,7 +18,7 @@
 			<div id="lista" class="list-group">
 				<span ng-repeat="grupo in grupos | filter : filtro">
 					<input type="checkbox" name="gruposList" id="{{grupo.id}}" ng-model="campana.grupos[$index].id"
-					 ng-true-value="'{{grupo.id}}'" ng-false-value="''" id="'{{grupo.id}}'"> {{grupo.title}}<br>
+					 ng-true-value="'{{grupo.id}}'" ng-false-value="''" > {{grupo.title}}<br>
 				</span><br>
 			</div>
 

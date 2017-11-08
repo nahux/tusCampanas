@@ -11,6 +11,7 @@ db.bind('campanas');
 var service = {};
 
 service.getById = getById;
+service.getCampanasUser = getCampanasUser;
 service.create = create;
 service.update = update;
 service.delete = _delete;
@@ -21,7 +22,7 @@ function getCampanasUser(userid){
 	var deferred = Q.defer();
 
 	//Busco campañas de usuario
-	db.campanas.find({ idUser: userid }).toArray(function(err, campanasUser) {
+	db.campanas.find({ idUser: userid, deleted:'false' }).toArray(function(err, campanasUser) {
 		if (err) deferred.reject(err);
 
 		if(campanasUser) {
@@ -36,10 +37,10 @@ function getCampanasUser(userid){
 	return deferred.promise;
 }
 
-function getById(_id) {
+function getById(id) {
 	var deferred = Q.defer();
 
-	db.campanas.findById(_id, function (err, campana) {
+	db.campanas.findById(id, function (err, campana) {
 		if (err) deferred.reject(err);
 
 		if (campana) {
@@ -69,54 +70,25 @@ function create(campana) {
 	return deferred.promise;
 }
  
-function update(_id, userParam) {
+function update(_id, campanaParams) {
 	var deferred = Q.defer();
 
-	// validation
-	db.users.findById(_id, function (err, user) {
-		if (err) deferred.reject(err);
+	//Campos a actualizar de campaña
+	var set = {
+			title: campanaParams.title,
+			desc: campanaParams.desc,
+			grupos: campanaParams.grupos,
+			deleted: campanaParams.deleted
+	};
 
-		if (user.username !== userParam.username) {
-				// username has changed so check if the new username is already taken
-				db.users.findOne(
-						{ username: userParam.username },
-						function (err, user) {
-								if (err) deferred.reject(err);
+	db.campanas.update(
+		{ _id: mongo.helper.toObjectID(_id) },
+		{ $set: set },
+		function (err, doc) {
+				if (err) deferred.reject(err);
 
-								if (user) {
-										// username already exists
-										deferred.reject('Username "' + req.body.username + '" is already taken')
-								} else {
-										updateUser();
-								}
-						});
-		} else {
-				updateUser();
-		}
-	});
-
-	function updateUser() {
-		// fields to update
-		var set = {
-				firstName: userParam.firstName,
-				lastName: userParam.lastName,
-				email: userParam.email,
-		};
-
-		// update password if it was entered
-		if (userParam.password) {
-				set.hash = bcrypt.hashSync(userParam.password, 10);
-		}
-
-		db.users.update(
-			{ _id: mongo.helper.toObjectID(_id) },
-			{ $set: set },
-			function (err, doc) {
-					if (err) deferred.reject(err);
-
-					deferred.resolve();
-			});
-	}
+				deferred.resolve();
+		});
 
 	return deferred.promise;
 }

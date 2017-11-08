@@ -6,7 +6,7 @@
 	</div><br>  
 	<div class="list-group"> 
 		<button type="button" class="list-group-item" ng-repeat="campana in campanas | filter : filtro" 
-				ui-sref="dashboard.campanas.detalle({ id: campana.id })"> 
+				ui-sref="dashboard.campanas.detalle({ id: campana._id })"> 
 			{{$index + 1}} - {{campana.title}}
 			<span class="icon-angle-right pull-right">></span>
 		</button>
