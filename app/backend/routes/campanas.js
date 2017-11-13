@@ -4,6 +4,19 @@ var router = express.Router();
 var uuid = require('uuid/v4');
 var campanasService = require('../models/campanas.service');
 
+//////////////////////////MAIL/////////////////////////////////////////
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+	service: 'gmail',
+	auth: {
+		user: 'tusCampanas@gmail.com',
+		pass: ''
+	}
+});
+
+//////////////////////////MAIL/////////////////////////////////////////
+
 var campanas = [
 								{
 									id:0,
@@ -131,6 +144,21 @@ router.post('/', function(req, res, next) {
 		campanasService.create(req.body)
 			.then(function () {
 					res.sendStatus(200);
+
+					var mailOptions = {
+						from: 'tusCampanas@gmail.com',
+						to: 'nahuel94@gmail.com',
+						subject: 'Sending Email using Node.js',
+						text: 'Campaña: '+campana.title+' Descripción: '+campana.desc
+					};
+							
+					transporter.sendMail(mailOptions, function(error, info){
+						if (error) {
+							console.log(error);
+						} else {
+							console.log('Email sent: ' + info.response);
+						}
+					});
 			})
 			.catch(function (err) {
 					res.status(400).send(err);

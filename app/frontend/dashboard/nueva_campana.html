@@ -8,17 +8,15 @@
 	</div>
 	<div class="panel-body">
 		<div class="input-group">
-			<!-- Debería recibir una campaña vacía -->
-			<form name="form-camp" novalidate>
-			 <label>Título</label>
-			 <input type="text" name="titulo" ng-model="campana.title" placeholder="Ingrese un título" class="form-control" ng-value="campana.title" required><br><br><br>
-			 <label>Descripción</label>
-			 <input type="text" name="desc" ng-model="campana.desc" placeholder="Ingrese una descripción" class="form-control" required><br><br><br><br>
+			<form name="form-camp" ng-submit="addTitleDesc(campana)">
+				<label>Título</label>
+				<input type="text" name="titulo" ng-model="campana.title" placeholder="Ingrese un título" class="form-control" ng-value="campana.title" required><br><br><br>
+				<label>Descripción</label>
+				<input type="text" name="desc" ng-model="campana.desc" placeholder="Ingrese una descripción" class="form-control" required><br><br><br><br>
+
+				<a class="btn btn-default" ui-sref="dashboard.campanas"><- Atras</a>
+				<input class="btn btn-default" type="submit" name="submit" value="Siguiente ->">
 			</form>
 		</div>
-
-		<br><br><br>
-		<a class="btn btn-default" ui-sref="dashboard.campanas"><- Atras</a>
-		<a class="btn btn-default" ng-disabled="form-camp.titulo.$invalid || form-camp.desc.$invalid" ui-sref="dashboard.campanas.nueva2" ng-click="addTitleDesc(campana)">Siguiente -></a>
 	</div>
 </div>

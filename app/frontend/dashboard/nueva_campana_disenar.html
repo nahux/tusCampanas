@@ -9,19 +9,28 @@
 	<div class="panel-body">
 		<h4>Realice el diseño de la campaña</h4>
 		<div class="input-group">
-			<form name="form-camp" action="dashboard/dashboard.html" method="post" novalidate>
+			<form name="form-camp" ng-submit="addCampana(campana)" method="post" novalidate>
 				<div class="panel panel-default">
 					<div class="panel-heading">{{campana.title}}</div>
-					<div style="overflow-y: scroll;" class="panel-body">
-						<img style="width:50%; height: auto;" src="../img/logo_camp.png" width="500px" height="500px">
-						<h2>{{campana.title}}</h2>
-						<h4>{{campana.desc}}</h4>
-						<div ng-repeat="grupo in campana.grupos">{{grupo.id}}</div>
+					<div>
+						<textarea id="contenido" name="contenido" rows="10" cols="80" ng-model="contenido">
+							{{campana.title}}
+							{{campana.desc}}
+						</textarea>
 					</div>
 				</div>
 				<a ui-sref="dashboard.campanas.nueva2" class="btn btn-default"><- Atras</a>
-				<button type="submit" class="btn btn-default" ng-click="addCampana(campana)">Enviar -></button>
+				<input type="submit" onclick="putContent()" class="btn btn-default" value="Enviar ->">
 			</form>
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">CKEDITOR.replace('contenido');</script>
+<script type="text/javascript">
+	function putContent() {
+		document.getElementById("contenido").value = CKEDITOR.instances.contenido.getData();
+	}
+
+</script>
+

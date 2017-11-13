@@ -195,10 +195,12 @@ angular
 										function($scope, CampanasService, GruposService, TrackingService, $state, $stateParams) {
 
 		$scope.campana = {grupos:[]};
+		$scope.contenido = '';
 
 		$scope.addTitleDesc = function (campana) {
 			CampanasService.addTitleDesc(campana);
 			$scope.refreshNuevaCampana();
+			$state.go('dashboard.campanas.nueva2',{},{reload:true});
 		}
 
 		$scope.refreshNuevaCampana = function() {
@@ -224,6 +226,7 @@ angular
 
 		$scope.addCampana = function(campana) {
 			var nuevaCampana = {};
+			var content = $scope.contenido;
 			CampanasService.addCampana(campana).then(function(nueva) {
 				TrackingService.addTracking(nueva).then(function() {
 				});
