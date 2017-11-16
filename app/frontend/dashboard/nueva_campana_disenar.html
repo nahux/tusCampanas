@@ -9,14 +9,12 @@
 	<div class="panel-body">
 		<h4>Realice el diseño de la campaña</h4>
 		<div class="input-group">
-			<form name="form-camp" ng-submit="addCampana(campana)" method="post" novalidate>
+			<form name="form-camp" ng-submit="addCampana(campana,datos)" method="post" novalidate>
 				<div class="panel panel-default">
 					<div class="panel-heading">{{campana.title}}</div>
 					<div>
-						<textarea id="contenido" name="contenido" rows="10" cols="80" ng-model="contenido">
-							{{campana.title}}
-							{{campana.desc}}
-						</textarea>
+						<div ckeditor="options" ng-model="contentEditor"></div>
+						<input type="text" id="datos" name="datos" ng-model="datos" hidden="true">
 					</div>
 				</div>
 				<a ui-sref="dashboard.campanas.nueva2" class="btn btn-default"><- Atras</a>
@@ -29,7 +27,7 @@
 <script type="text/javascript">CKEDITOR.replace('contenido');</script>
 <script type="text/javascript">
 	function putContent() {
-		document.getElementById("contenido").value = CKEDITOR.instances.contenido.getData();
+		$("#datos").value = CKEDITOR.instances.contenido.getData();
 	}
 
 </script>

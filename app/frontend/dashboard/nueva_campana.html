@@ -8,6 +8,7 @@
 	</div>
 	<div class="panel-body">
 		<div class="input-group">
+			<p style="color:red" ng-repeat="mensaje in errorMessages">{{mensaje.msg}}</p>
 			<form name="form-camp" ng-submit="addTitleDesc(campana)">
 				<label>Título</label>
 				<input type="text" name="titulo" ng-model="campana.title" placeholder="Ingrese un título" class="form-control" ng-value="campana.title" required><br><br><br>

@@ -11,7 +11,12 @@
 		<h4>Descripción</h4>
 		<p>{{campana.desc}} </p>
 		<h4>Vista Previa</h4>
-		<img src="" alt="" width="50px" height="50px">
+		<div class="panel panel-default"">
+			<div class="panel-heading"></div>
+				<div class="panel-body" style="img {max-width: 100px }">
+					<p ng-bind-html="campana.contenido">{{campana.contenido}}</p>
+				</div>	
+		</div>
 		<h4>Grupos</h4>
 		<ul>
 			<li ng-repeat="grupo in gruposCamp">{{grupo.title}}</li>

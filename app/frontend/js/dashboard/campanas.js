@@ -191,11 +191,18 @@ angular
 //Controller
 angular
 	.module('app')
-	.controller("NuevaCampController", ["$scope", "CampanasService", "GruposService", "TrackingService", "$state", "$stateParams",
-										function($scope, CampanasService, GruposService, TrackingService, $state, $stateParams) {
+	.controller("NuevaCampController", ["$scope", "CampanasService", "GruposService", "TrackingService", "$state", "$stateParams", "$rootScope",
+										function($scope, CampanasService, GruposService, TrackingService, $state, $stateParams, $rootScope) {
 
 		$scope.campana = {grupos:[]};
-		$scope.contenido = '';
+		
+		$scope.contentEditor = '';
+			// Editor options.
+		$scope.options = {
+			language: 'es',
+			allowedContent: true,
+			entities: false
+		};
 
 		$scope.addTitleDesc = function (campana) {
 			CampanasService.addTitleDesc(campana);
@@ -226,11 +233,16 @@ angular
 
 		$scope.addCampana = function(campana) {
 			var nuevaCampana = {};
-			var content = $scope.contenido;
-			CampanasService.addCampana(campana).then(function(nueva) {
-				TrackingService.addTracking(nueva).then(function() {
+			campana.contenido = $scope.contentEditor;
+			CampanasService.addCampana(campana)
+				.then(function(nueva) {
+					TrackingService.addTracking(nueva)
+						.then(function() {
+						});
+				}, function(response) {
+					$rootScope.errorMessages = response;
+					$state.go('dashboard.campanas.nueva',{},{reload:true});
 				});
-			});
 			
 			$state.go('dashboard.campanas',{},{reload:true});
 		}

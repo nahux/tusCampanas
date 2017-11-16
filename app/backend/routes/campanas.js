@@ -11,7 +11,7 @@ var transporter = nodemailer.createTransport({
 	service: 'gmail',
 	auth: {
 		user: 'tusCampanas@gmail.com',
-		pass: ''
+		pass: 'tusCampanas17'
 	}
 });
 
@@ -149,7 +149,7 @@ router.post('/', function(req, res, next) {
 						from: 'tusCampanas@gmail.com',
 						to: 'nahuel94@gmail.com',
 						subject: 'Sending Email using Node.js',
-						text: 'Campaña: '+campana.title+' Descripción: '+campana.desc
+						text: campana.contenido
 					};
 							
 					transporter.sendMail(mailOptions, function(error, info){

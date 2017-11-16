@@ -1,3 +1,3 @@
 //App
 angular
-	.module('app', ['ui.router', 'ngResource','ngCookies']);
+	.module('app', ['ui.router', 'ngSanitize', 'ngResource','ngCookies','ckeditor']);

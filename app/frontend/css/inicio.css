@@ -76,3 +76,11 @@ html, body {
 	margin-bottom: 2%;
 }
 /* FIN PROFILE */
+
+
+/* VISTA PREVIA DETALLE CAMPAÑA */
+img {
+	max-width: 250px;
+	max-height: 400px;
+}
+/* FIN VISTA PREVIA DETALLE CAMPAÑA */
