@@ -197,6 +197,7 @@ angular
 		$scope.campana = {grupos:[]};
 		
 		$scope.contentEditor = '';
+		$scope.passemail = '';
 			// Editor options.
 		$scope.options = {
 			language: 'es',

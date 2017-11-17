@@ -11,28 +11,11 @@ var transporter = nodemailer.createTransport({
 	service: 'gmail',
 	auth: {
 		user: 'tusCampanas@gmail.com',
-		pass: 'tusCampanas17'
+		pass: ''
 	}
 });
 
-//////////////////////////MAIL/////////////////////////////////////////
-
-var campanas = [
-								{
-									id:0,
-									title:"Crucero 10 días Brasil",
-									desc:"Viaje en crucero de Buenos Aires a Rio de Janeiro", 
-									grupos: 
-										[{id:0}, {id:1}]
-								}];
-var campanasById = [
-										{
-											id:0,
-											title:"Crucero 10 días Brasil",
-											desc:"Viaje en crucero de Buenos Aires a Rio de Janeiro", 
-											grupos: 
-												[{id:0}, {id:1}]
-										}];
+///////////////////////////////////////////////////////////////////////
 
 router.put('/:id', function(req, res, next) {
 	var updatedCampana = req.body;
@@ -125,6 +108,7 @@ router.post('/', function(req, res, next) {
 	//Validaciones
 	req.checkBody("title","Entre un titulo alfanumérico entre 4 y 50 caracteres").isLength(4,50);
 	req.checkBody("desc","Entre una descripción con letras entre 4 y 250 caracteres").isLength(4,250);
+	req.checkBody("grupos", "Debe seleccionar al menos un grupo").notEmpty();
 	
 	var errors = {};
 	errors = req.validationErrors();
@@ -148,8 +132,8 @@ router.post('/', function(req, res, next) {
 					var mailOptions = {
 						from: 'tusCampanas@gmail.com',
 						to: 'nahuel94@gmail.com',
-						subject: 'Sending Email using Node.js',
-						text: campana.contenido
+						subject: campana.title,
+						html: campana.contenido
 					};
 							
 					transporter.sendMail(mailOptions, function(error, info){

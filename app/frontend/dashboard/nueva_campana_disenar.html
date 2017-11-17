@@ -9,14 +9,15 @@
 	<div class="panel-body">
 		<h4>Realice el diseño de la campaña</h4>
 		<div class="input-group">
-			<form name="form-camp" ng-submit="addCampana(campana,datos)" method="post" novalidate>
+			<form name="form-camp" ng-submit="addCampana(campana)" method="post" novalidate>
 				<div class="panel panel-default">
 					<div class="panel-heading">{{campana.title}}</div>
 					<div>
 						<div ckeditor="options" ng-model="contentEditor"></div>
-						<input type="text" id="datos" name="datos" ng-model="datos" hidden="true">
 					</div>
 				</div>
+				<label>Ingrese la contraseña de su email</label>
+				<input type="password" id="passemail" name="passemail" ng-model="passemail" class="form-control"><br><br><br>
 				<a ui-sref="dashboard.campanas.nueva2" class="btn btn-default"><- Atras</a>
 				<input type="submit" onclick="putContent()" class="btn btn-default" value="Enviar ->">
 			</form>
@@ -25,10 +26,5 @@
 </div>
 
 <script type="text/javascript">CKEDITOR.replace('contenido');</script>
-<script type="text/javascript">
-	function putContent() {
-		$("#datos").value = CKEDITOR.instances.contenido.getData();
-	}
 
-</script>
 
