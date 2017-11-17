@@ -59,10 +59,12 @@ angular
 			return deferred.promise;  
 		}
 
-		this.addCampana = function(campanaNew) {
+		this.addCampana = function(campanaNew,passemail) {
 			var deferred = $q.defer();
 			
-			var campanaCreada = EntryCampanas.save(campanaNew,function(){
+			var Indata = {'campana': campanaNew, 'passemail': passemail };
+
+			var campanaCreada = EntryCampanas.save(Indata,function(){
 				deferred.resolve(campanaCreada);
 			},function(error){
 				deferred.reject(error.data);
@@ -235,7 +237,7 @@ angular
 		$scope.addCampana = function(campana) {
 			var nuevaCampana = {};
 			campana.contenido = $scope.contentEditor;
-			CampanasService.addCampana(campana)
+			CampanasService.addCampana(campana,$scope.passemail)
 				.then(function(nueva) {
 					TrackingService.addTracking(nueva)
 						.then(function() {

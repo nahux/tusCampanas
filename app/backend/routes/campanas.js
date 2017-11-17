@@ -3,17 +3,11 @@ var express = require('express');
 var router = express.Router();
 var uuid = require('uuid/v4');
 var campanasService = require('../models/campanas.service');
+var userService = require('../models/user.service');
+var Q = require('q');
 
 //////////////////////////MAIL/////////////////////////////////////////
 var nodemailer = require('nodemailer');
-
-var transporter = nodemailer.createTransport({
-	service: 'gmail',
-	auth: {
-		user: 'tusCampanas@gmail.com',
-		pass: ''
-	}
-});
 
 ///////////////////////////////////////////////////////////////////////
 
@@ -106,32 +100,49 @@ router.delete('/:id', function(req, res, next) {
 router.post('/', function(req, res, next) {
 
 	//Validaciones
-	req.checkBody("title","Entre un titulo alfanumérico entre 4 y 50 caracteres").isLength(4,50);
-	req.checkBody("desc","Entre una descripción con letras entre 4 y 250 caracteres").isLength(4,250);
-	req.checkBody("grupos", "Debe seleccionar al menos un grupo").notEmpty();
+	req.checkBody("campana.title","Entre un titulo alfanumérico entre 4 y 50 caracteres").isLength(4,50);
+	req.checkBody("campana.desc","Entre una descripción con letras entre 4 y 250 caracteres").isLength(4,250);
+	req.checkBody("campana.grupos", "Debe seleccionar al menos un grupo").notEmpty();
 	
 	var errors = {};
 	errors = req.validationErrors();
 	
-	if(!req.body.grupos) {
+	if(!req.body.campana.grupos) {
 		errors[errors.length()].msg = 'Debe seleccionar al menos un grupo';
 	}
 	if(errors){
 		res.status(400).send(errors);
 	}
 	else{
+		var deferred = Q.defer();
+
+		var user = userService.getById(req.user.sub)
+			.then(function(user) {
+				deferred.resolve(user)
+			},function(){
+				res.status(400).send('Error al buscar email de usuario');
+			})
+
+		var transporter = nodemailer.createTransport({
+			service: 'gmail',
+			auth: {
+				user:  userEmail,
+				pass:  req.body.passemail
+			}
+		});
+
 		//Le agrego el id del usuario que la crea
-		var campana = req.body;
+		var campana = req.body.campana;
 		campana.idUser = req.user.sub;
 		campana.deleted = 'false';
 		//Llamo al servicio de mongoose para agregarla
-		campanasService.create(req.body)
+		campanasService.create(campana)
 			.then(function () {
 					res.sendStatus(200);
 
 					var mailOptions = {
-						from: 'tusCampanas@gmail.com',
-						to: 'nahuel94@gmail.com',
+						from: userEmail,
+						to: 'tusCampanas@gmail.com',
 						subject: campana.title,
 						html: campana.contenido
 					};
